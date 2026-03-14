@@ -36,6 +36,7 @@ export default function SignupPage() {
             name: firstName,
             username,
           },
+          emailRedirectTo: 'https://dashboard.tradegrail.net',
         },
       });
       if (error) throw error;
