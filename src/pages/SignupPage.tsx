@@ -42,7 +42,7 @@ export default function SignupPage() {
       if (data.user) {
         login({ id: data.user.id, email: data.user.email || '' });
         // 跳转到工具页面
-        window.location.href = 'https://trading-journal-ruby-two.vercel.app';
+        window.location.href = 'https://dashboard.tradegrail.net';
       }
     } catch (err: any) {
       setError(err.message || '注册失败，请稍后重试');
