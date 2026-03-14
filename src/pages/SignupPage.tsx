@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { TradeGrailLogo } from '../components/Logo';
-import { authApi } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { DynamicOrb } from '../components/DynamicOrb';
 import { useLanguage } from '../context/LanguageContext';
+import { supabase } from '../lib/supabase';
 
 export default function SignupPage() {
   const { t } = useLanguage();
@@ -18,7 +18,6 @@ export default function SignupPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,11 +28,24 @@ export default function SignupPage() {
     setError('');
     setIsLoading(true);
     try {
-      const user = await authApi.signup({ email, password, name: firstName, username });
-      login(user);
-      navigate('/dashboard');
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            name: firstName,
+            username,
+          },
+        },
+      });
+      if (error) throw error;
+      if (data.user) {
+        login({ id: data.user.id, email: data.user.email || '' });
+        // 跳转到工具页面
+        window.location.href = 'https://trading-journal-ruby-two.vercel.app';
+      }
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || '注册失败，请稍后重试');
     } finally {
       setIsLoading(false);
     }

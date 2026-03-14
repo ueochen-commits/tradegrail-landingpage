@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { TradeGrailLogo } from '../components/Logo';
-import { authApi } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { DynamicOrb } from '../components/DynamicOrb';
 import { useLanguage } from '../context/LanguageContext';
+import { supabase } from '../lib/supabase';
 
 export default function LoginPage() {
   const { t } = useLanguage();
@@ -15,18 +15,24 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
     try {
-      const user = await authApi.login({ email, password });
-      login(user);
-      navigate('/dashboard');
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) throw error;
+      if (data.user) {
+        login({ id: data.user.id, email: data.user.email || '' });
+        // 跳转到工具页面
+        window.location.href = 'https://trading-journal-ruby-two.vercel.app';
+      }
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || '登录失败，请检查邮箱和密码');
     } finally {
       setIsLoading(false);
     }
