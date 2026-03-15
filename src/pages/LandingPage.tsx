@@ -14,7 +14,6 @@ import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 
 import { MobileDashboardMockup } from '../components/MobileDashboardMockup';
-import { CountdownTimer } from '../components/CountdownTimer';
 
 const FadeInWhenVisible = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
   <motion.div
@@ -83,7 +82,6 @@ export default function LandingPage() {
               </Link>
             </div>
             
-            <CountdownTimer />
           </motion.div>
 
           {/* Floating Stats */}
