@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Eye, EyeOff } from 'lucide-react';
 import { TradeGrailLogo } from '../components/Logo';
 import { useAuth } from '../context/AuthContext';
 import { DynamicOrb } from '../components/DynamicOrb';
@@ -14,6 +14,9 @@ export default function SignupPage() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +26,10 @@ export default function SignupPage() {
     e.preventDefault();
     if (!agreeTerms) {
       setError(t('auth.signup.error_terms'));
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError(t('auth.signup.error_password_mismatch'));
       return;
     }
     setError('');
@@ -46,7 +53,7 @@ export default function SignupPage() {
         window.location.href = 'https://dashboard.tradegrail.net';
       }
     } catch (err: any) {
-      setError(err.message || '注册失败，请稍后重试');
+      setError(err.message || t('auth.signup.error_failed'));
     } finally {
       setIsLoading(false);
     }
@@ -64,7 +71,7 @@ export default function SignupPage() {
       });
       if (error) throw error;
     } catch (err: any) {
-      setError(err.message || 'Google 注册失败');
+      setError(err.message || t('auth.signup.error_google'));
       setIsLoading(false);
     }
   };
@@ -147,46 +154,80 @@ export default function SignupPage() {
 
               <div className="space-y-2">
                 <label className="block text-[11px] font-bold uppercase tracking-wider text-white/40 ml-1">{t('auth.signup.first_name_label')}</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   required
+                  placeholder={t('auth.signup.first_name_placeholder')}
                   className="w-full bg-[#0A051A] border border-white/10 rounded-xl py-3.5 px-5 text-white placeholder:text-white/20 focus:outline-none focus:border-brand-primary/50 transition-all"
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="block text-[11px] font-bold uppercase tracking-wider text-white/40 ml-1">{t('auth.signup.email_label')}</label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  placeholder={t('auth.signup.email_placeholder')}
                   className="w-full bg-[#0A051A] border border-white/10 rounded-xl py-3.5 px-5 text-white placeholder:text-white/20 focus:outline-none focus:border-brand-primary/50 transition-all"
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="block text-[11px] font-bold uppercase tracking-wider text-white/40 ml-1">{t('auth.signup.username_label')}</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
+                  placeholder={t('auth.signup.username_placeholder')}
                   className="w-full bg-[#0A051A] border border-white/10 rounded-xl py-3.5 px-5 text-white placeholder:text-white/20 focus:outline-none focus:border-brand-primary/50 transition-all"
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="block text-[11px] font-bold uppercase tracking-wider text-white/40 ml-1">{t('auth.signup.password_label')}</label>
-                <input 
-                  type="password" 
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="w-full bg-[#0A051A] border border-white/10 rounded-xl py-3.5 px-5 text-white placeholder:text-white/20 focus:outline-none focus:border-brand-primary/50 transition-all"
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder={t('auth.signup.password_placeholder')}
+                    className="w-full bg-[#0A051A] border border-white/10 rounded-xl py-3.5 px-5 pr-12 text-white placeholder:text-white/20 focus:outline-none focus:border-brand-primary/50 transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-white/40 ml-1">{t('auth.signup.confirm_password_label')}</label>
+                <div className="relative">
+                  <input
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                    placeholder={t('auth.signup.confirm_password_placeholder')}
+                    className="w-full bg-[#0A051A] border border-white/10 rounded-xl py-3.5 px-5 pr-12 text-white placeholder:text-white/20 focus:outline-none focus:border-brand-primary/50 transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+                  >
+                    {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
 
               <div className="flex items-center gap-3 py-2">
@@ -218,12 +259,12 @@ export default function SignupPage() {
                   <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
-                {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Continue with Google'}
+                {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : t('auth.google_button')}
               </button>
 
               <div className="relative flex items-center">
                 <div className="flex-grow border-t border-white/10"></div>
-                <span className="flex-shrink-0 mx-4 text-white/40 text-xs">OR</span>
+                <span className="flex-shrink-0 mx-4 text-white/40 text-xs">{t('auth.or_divider')}</span>
                 <div className="flex-grow border-t border-white/10"></div>
               </div>
 
