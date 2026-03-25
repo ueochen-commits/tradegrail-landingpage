@@ -42,6 +42,12 @@ export default function LandingPage() {
 
   return (
     <div className="pt-16 overflow-x-hidden bg-[var(--bg-main)] text-[var(--text-main)] transition-colors duration-300 relative">
+      {/* --- Beta Banner --- */}
+      <div className="fixed top-0 left-0 right-0 z-[60] bg-indigo-600 text-white text-center py-2 px-4 text-sm font-medium">
+        🎉 {language === 'zh'
+          ? '现已开放内测，所有功能完全免费使用，欢迎体验并反馈建议！'
+          : 'Now in Beta — All features are completely free. Try it out and share your feedback!'}
+      </div>
       <div className="fixed inset-0 pointer-events-none z-0">
         <BackgroundAnimation />
       </div>
