@@ -27,7 +27,14 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-main)]/80 backdrop-blur-md border-b border-[var(--border-subtle)]">
+    <nav className="fixed top-0 left-0 right-0 z-50">
+      {/* Beta Banner */}
+      <div className="bg-indigo-600 text-white text-center py-2 px-4 text-sm font-medium">
+        🎉 {language === 'zh'
+          ? '现已开放内测，所有功能完全免费使用，欢迎体验并反馈建议！'
+          : 'Now in Beta — All features are completely free. Try it out and share your feedback!'}
+      </div>
+      <div className="bg-[var(--bg-main)]/80 backdrop-blur-md border-b border-[var(--border-subtle)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-2">
@@ -124,7 +131,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="md:hidden bg-[var(--bg-main)] border-b border-[var(--border-subtle)] px-4 py-4 space-y-4"
@@ -146,6 +153,7 @@ export default function Navbar() {
           )}
         </motion.div>
       )}
+    </div>
     </nav>
   );
 }
