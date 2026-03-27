@@ -3,6 +3,9 @@ import { createServer as createViteServer } from "vite";
 import Database from "better-sqlite3";
 import path from "path";
 import { fileURLToPath } from "url";
+import bcrypt from "bcrypt";
+
+const SALT_ROUNDS = 12;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,22 +49,47 @@ async function startServer() {
     res.json({ status: "ok" });
   });
 
-  // Simple Auth (Mock for now, but using DB)
-  app.post("/api/auth/signup", (req, res) => {
+  // Auth
+  app.post("/api/auth/signup", async (req, res) => {
     const { email, password, name } = req.body;
+    if (!email || !password || !name) {
+      return res.status(400).json({ error: "email, password and name are required" });
+    }
     try {
+      const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
       const stmt = db.prepare("INSERT INTO users (email, password, name) VALUES (?, ?, ?)");
-      const info = stmt.run(email, password, name);
+      const info = stmt.run(email, hashedPassword, name);
       res.json({ id: info.lastInsertRowid, email, name });
     } catch (err: any) {
       res.status(400).json({ error: err.message });
     }
   });
 
-  app.post("/api/auth/login", (req, res) => {
+  app.post("/api/auth/login", async (req, res) => {
     const { email, password } = req.body;
-    const user = db.prepare("SELECT * FROM users WHERE email = ? AND password = ?").get(email, password) as any;
-    if (user) {
+    if (!email || !password) {
+      return res.status(400).json({ error: "email and password are required" });
+    }
+    const user = db.prepare("SELECT * FROM users WHERE email = ?").get(email) as any;
+    if (!user) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    const isHashed = user.password.startsWith("$2b$") || user.password.startsWith("$2a$");
+    let match = false;
+
+    if (isHashed) {
+      match = await bcrypt.compare(password, user.password);
+    } else {
+      // 旧明文密码：验证通过后自动升级为 hash
+      match = user.password === password;
+      if (match) {
+        const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+        db.prepare("UPDATE users SET password = ? WHERE id = ?").run(hashedPassword, user.id);
+      }
+    }
+
+    if (match) {
       res.json({ id: user.id, email: user.email, name: user.name });
     } else {
       res.status(401).json({ error: "Invalid credentials" });
