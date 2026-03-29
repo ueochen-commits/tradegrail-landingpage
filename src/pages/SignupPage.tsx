@@ -185,12 +185,21 @@ export default function SignupPage() {
                 {/* Divider */}
                 <div className="w-full border-t border-white/5" />
 
-                {/* Resend */}
+                {/* Actions */}
                 <div className="flex flex-col items-center gap-3 w-full">
+                  {/* Primary: go to login */}
+                  <Link
+                    to="/login"
+                    className="w-full py-4 rounded-xl bg-[#6E64FF] hover:bg-[#5D54E6] text-white text-sm font-bold flex items-center justify-center transition-all shadow-lg shadow-[#6E64FF]/20"
+                  >
+                    {t('auth.confirm.go_login')}
+                  </Link>
+
+                  {/* Secondary: resend */}
                   <p className="text-xs text-white/30">{t('auth.confirm.spam')}</p>
                   {resendSuccess ? (
-                    <div className="flex items-center gap-2 text-emerald-400 text-sm font-semibold">
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="flex items-center gap-1.5 text-emerald-400 text-xs font-semibold">
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                       </svg>
                       {t('auth.confirm.resent')}
@@ -199,25 +208,12 @@ export default function SignupPage() {
                     <button
                       onClick={handleResend}
                       disabled={isResending}
-                      className="w-full py-3.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-white/70 hover:text-white text-sm font-semibold flex items-center justify-center gap-2 transition-all disabled:opacity-40"
+                      className="flex items-center gap-1.5 text-xs text-white/30 hover:text-white/60 transition-colors disabled:opacity-40"
                     >
-                      {isResending ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : (
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                        </svg>
-                      )}
+                      {isResending && <Loader2 className="w-3 h-3 animate-spin" />}
                       {t('auth.confirm.resend')}
                     </button>
                   )}
-
-                  <Link
-                    to="/login"
-                    className="text-xs text-white/30 hover:text-white/60 transition-colors mt-1"
-                  >
-                    {t('auth.confirm.go_login')}
-                  </Link>
                 </div>
               </motion.div>
             ) : (
