@@ -20,6 +20,9 @@ export default function SignupPage() {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [emailConfirmSent, setEmailConfirmSent] = useState(false);
+  const [isResending, setIsResending] = useState(false);
+  const [resendSuccess, setResendSuccess] = useState(false);
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -48,9 +51,9 @@ export default function SignupPage() {
       });
       if (error) throw error;
       if (data.user) {
-        login({ id: data.user.id, email: data.user.email || '' });
-        // 跳转到工具页面
-        window.location.href = 'https://dashboard.tradegrail.net';
+        // Don't redirect immediately — email confirmation is required first.
+        // Show a "check your email" screen so the user knows what to do next.
+        setEmailConfirmSent(true);
       }
     } catch (err: any) {
       setError(err.message || t('auth.signup.error_failed'));
@@ -73,6 +76,20 @@ export default function SignupPage() {
     } catch (err: any) {
       setError(err.message || t('auth.signup.error_google'));
       setIsLoading(false);
+    }
+  };
+
+  const handleResend = async () => {
+    setIsResending(true);
+    setResendSuccess(false);
+    try {
+      const { error } = await supabase.auth.resend({ type: 'signup', email });
+      if (error) throw error;
+      setResendSuccess(true);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsResending(false);
     }
   };
 
@@ -131,17 +148,65 @@ export default function SignupPage() {
         </div>
 
         {/* Right Side: Signup Form Card */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           className="w-full max-w-md mx-auto"
         >
           <div className="bg-[#120B2E]/60 border border-white/5 rounded-[2.5rem] p-10 md:p-12 backdrop-blur-2xl shadow-2xl relative">
-            {/* Subtle Inner Glow */}
             <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
-            
-            <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
+
+            {emailConfirmSent ? (
+              /* ── Check your email screen ── */
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="relative z-10 flex flex-col items-center text-center gap-5 py-4"
+              >
+                <div className="w-16 h-16 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-bold text-white">{t('auth.confirm.title') || 'Check your email'}</h2>
+                <p className="text-sm text-white/50 leading-relaxed">
+                  {t('auth.confirm.desc') || 'We sent a confirmation link to'}{' '}
+                  <span className="text-white/80 font-semibold">{email}</span>.
+                  {' '}{t('auth.confirm.desc2') || 'Click the link to activate your account.'}
+                </p>
+                <p className="text-xs text-white/30">
+                  {t('auth.confirm.spam') || "Didn't receive it? Check your spam folder."}
+                </p>
+                {resendSuccess ? (
+                  <p className="text-sm text-emerald-400 font-medium">
+                    {t('auth.confirm.resent') || 'Email resent successfully!'}
+                  </p>
+                ) : (
+                  <button
+                    onClick={handleResend}
+                    disabled={isResending}
+                    className="flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-semibold disabled:opacity-50 transition-colors"
+                  >
+                    {isResending ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                    )}
+                    {t('auth.confirm.resend') || 'Resend confirmation email'}
+                  </button>
+                )}
+                <Link
+                  to="/login"
+                  className="mt-2 text-xs text-white/30 hover:text-white/50 transition-colors"
+                >
+                  {t('auth.confirm.go_login') || 'Already confirmed? Sign in'}
+                </Link>
+              </motion.div>
+            ) : (
+              <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
               {error && (
                 <motion.div 
                   initial={{ opacity: 0, height: 0 }}
@@ -283,6 +348,7 @@ export default function SignupPage() {
                 </p>
               </div>
             </form>
+            )}
           </div>
         </motion.div>
       </div>
