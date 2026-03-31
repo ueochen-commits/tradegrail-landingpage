@@ -17,7 +17,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.badge': '由 AI 驱动的交易表现',
     'hero.title': '发现您的交易',
     'hero.title.accent': '优势。',
-    'hero.desc': 'TradeGrail 将您的交易数据转化为可执行的洞察。停止猜测，开始像机构一样交易。',
+    'hero.desc': 'TradeGrail 交易复盘日志，将您的交易数据转化为可执行的洞察。停止猜测，开始像机构一样交易。',
     'hero.cta': '立即开始免费试用',
     'hero.demo': '查看演示',
     'hero.stats.roi': '月均投资回报率',
