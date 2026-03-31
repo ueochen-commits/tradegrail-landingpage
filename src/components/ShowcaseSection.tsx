@@ -361,8 +361,8 @@ export const ShowcaseSection = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="h-[300px] w-full">
-                        <ResponsiveContainer width="100%" height="100%">
+                      <div className="h-[300px] w-full min-h-[300px]">
+                        <ResponsiveContainer width="100%" height="100%" minWidth={200} minHeight={300}>
                           <AreaChart data={equityData}>
                             <defs>
                               <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
@@ -404,8 +404,8 @@ export const ShowcaseSection = () => {
                           <Zap className="w-5 h-5 text-brand-primary" />
                           <h3 className="text-lg font-bold text-[var(--text-main)]">{t('mockup.dashboard.strategy_perf')}</h3>
                         </div>
-                        <div className="h-[200px] w-full">
-                          <ResponsiveContainer width="100%" height="100%">
+                        <div className="h-[200px] w-full min-h-[200px]">
+                          <ResponsiveContainer width="100%" height="100%" minWidth={200} minHeight={200}>
                             <BarChart data={strategyData} layout="vertical" margin={{ left: 40 }}>
                               <XAxis type="number" hide />
                               <YAxis 

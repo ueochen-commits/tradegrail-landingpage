@@ -113,8 +113,8 @@ export const InteractiveMockup = () => {
           </div>
         </div>
 
-        <div className="h-[140px] w-full relative z-10">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="h-[140px] w-full relative z-10 min-h-[140px]">
+          <ResponsiveContainer width="100%" height="100%" minWidth={200} minHeight={140}>
             <AreaChart data={equityData}>
               <defs>
                 <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
@@ -171,8 +171,8 @@ export const InteractiveMockup = () => {
             </div>
           </div>
           
-          <div className="flex-1 w-full relative z-10">
-            <ResponsiveContainer width="100%" height="100%">
+          <div className="flex-1 w-full relative z-10 min-h-[200px]">
+            <ResponsiveContainer width="100%" height="100%" minWidth={200} minHeight={200}>
               <BarChart data={strategyData} layout="vertical" margin={{ left: 60 }}>
                 <XAxis type="number" hide />
                 <YAxis 
