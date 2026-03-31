@@ -6,8 +6,10 @@ import { LanguageProvider } from './context/LanguageContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 
-// 使用 React.lazy() 实现代码分割 - 每个页面只在访问时才加载
-const LandingPage = React.lazy(() => import('./pages/LandingPage'));
+// 首页直接导入，不使用 lazy loading（用户一定会访问）
+import LandingPage from './pages/LandingPage';
+
+// 其他页面使用 React.lazy() 实现代码分割 - 只在访问时才加载
 const PricingPage = React.lazy(() => import('./pages/PricingPage'));
 const LoginPage = React.lazy(() => import('./pages/LoginPage'));
 const SignupPage = React.lazy(() => import('./pages/SignupPage'));
