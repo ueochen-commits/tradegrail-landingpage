@@ -61,8 +61,7 @@ export default function LoginPage() {
       {/* Top Logo */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 z-50">
         <Link to="/" className="flex items-center gap-3 group">
-          <TradeGrailLogo className="w-8 h-8" />
-          <span className="text-xl font-bold tracking-tighter text-white uppercase opacity-90">TradeGrail</span>
+          <img src="/TRADEGRAIL-lion.png" alt="TradeGrail" style={{ height: '40px', width: 'auto' }} />
         </Link>
       </div>
 
