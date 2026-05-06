@@ -117,9 +117,8 @@ export default function Navbar() {
         <div className="flex items-center h-[72px] gap-6">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 shrink-0">
-            <TradeGrailLogo className="w-8 h-8" />
-            <span className="text-[17px] font-bold tracking-tight text-[var(--text-main)]">TradeGrail</span>
+          <Link to="/" className="flex items-center shrink-0">
+            <img src="/landingpage-logo.png" alt="TradeGrail" className="h-9 w-auto" />
           </Link>
 
           {/* Center nav */}
