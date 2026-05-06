@@ -68,7 +68,7 @@ export default function LandingPage() {
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-5 leading-[1.1] text-[var(--text-main)]">
               {t('hero.title')} <span className="text-brand-primary italic">{t('hero.title.accent')}</span>
             </h1>
-            <p className="text-base sm:text-lg text-[var(--text-muted)] max-w-xl mx-auto mb-7 leading-relaxed">
+            <p className="text-base sm:text-lg text-[var(--text-muted)] max-w-xl mx-auto mb-3 leading-relaxed">
               {t('hero.desc')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
