@@ -120,7 +120,7 @@ export const ShowcaseSection = () => {
           </div>
 
           {/* App Interface Mockup */}
-          <div className="mt-10 bg-[var(--bg-main)] flex h-[900px] overflow-hidden transition-colors duration-300">
+          <div className="mt-10 bg-[var(--bg-main)] flex h-[620px] overflow-hidden transition-colors duration-300">
             {/* Sidebar */}
             <div className="w-64 border-r border-[var(--border-subtle)] bg-[var(--sidebar-bg)] flex flex-col p-4 shrink-0 transition-colors duration-300">
               <div className="flex items-center gap-2 mb-8 px-2">

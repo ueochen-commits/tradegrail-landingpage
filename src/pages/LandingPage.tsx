@@ -53,58 +53,34 @@ export default function LandingPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative flex items-center justify-center pt-16 pb-4 z-10">
-        <motion.div 
+      <section className="relative flex items-center justify-center pt-10 pb-2 z-10">
+        <motion.div
           style={{ opacity, scale }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
+          className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-5 backdrop-blur-sm">
               <Zap className="w-3 h-3 fill-current" /> {t('hero.badge')}
             </span>
-            <h1 className="text-6xl sm:text-8xl font-bold tracking-tighter mb-6 leading-[0.9] bg-clip-text text-transparent bg-gradient-to-b from-[var(--text-main)] to-[var(--text-muted)]">
-              {t('hero.title')} <br />
-              <span className="text-brand-primary italic">{t('hero.title.accent')}</span>
+            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-5 leading-[1.1] text-[var(--text-main)]">
+              {t('hero.title')} <span className="text-brand-primary italic">{t('hero.title.accent')}</span>
             </h1>
-            <p className="text-xl text-[var(--text-muted)] max-w-2xl mx-auto mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg text-[var(--text-muted)] max-w-xl mx-auto mb-7 leading-relaxed">
               {t('hero.desc')}
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Link to="/signup" className="w-full sm:w-auto bg-gradient-to-r from-[#2b276f] to-[#3a33a9] hover:from-[#332e88] hover:to-[#4540c0] text-white px-10 py-5 rounded-2xl text-lg font-bold transition-all flex items-center justify-center gap-3 group shadow-[0_0_30px_-5px_rgba(58,51,169,0.5)]">
-                {t('hero.cta')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link to="/signup" className="w-full sm:w-auto bg-gradient-to-r from-[#2b276f] to-[#3a33a9] hover:from-[#332e88] hover:to-[#4540c0] text-white px-8 py-3.5 rounded-xl text-base font-bold transition-all flex items-center justify-center gap-2 group shadow-[0_0_24px_-4px_rgba(58,51,169,0.45)]">
+                {t('hero.cta')} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/login" className="w-full sm:w-auto bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)] px-10 py-5 rounded-2xl text-lg font-bold hover:bg-[var(--border-subtle)] transition-all backdrop-blur-md">
+              <Link to="/login" className="w-full sm:w-auto bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)] px-8 py-3.5 rounded-xl text-base font-bold hover:bg-[var(--border-subtle)] transition-all">
                 {t('hero.demo')}
               </Link>
             </div>
-            
           </motion.div>
-
-          {/* Floating Stats */}
-          <div className="hidden lg:block absolute -left-20 top-1/4">
-            <motion.div 
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="p-4 rounded-2xl bg-[var(--card-bg)] border border-[var(--border-subtle)] backdrop-blur-xl shadow-2xl"
-            >
-              <div className="text-brand-primary text-2xl font-mono font-bold">+24.5%</div>
-              <div className="text-[10px] text-[var(--text-muted)] uppercase font-bold">{t('hero.stats.roi')}</div>
-            </motion.div>
-          </div>
-          <div className="hidden lg:block absolute -right-20 bottom-1/4">
-            <motion.div 
-              animate={{ y: [0, 20, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="p-4 rounded-2xl bg-[var(--card-bg)] border border-[var(--border-subtle)] backdrop-blur-xl shadow-2xl"
-            >
-              <div className="text-[var(--text-main)] text-2xl font-mono font-bold">2.84</div>
-              <div className="text-[10px] text-[var(--text-muted)] uppercase font-bold">{t('hero.stats.profit_factor')}</div>
-            </motion.div>
-          </div>
         </motion.div>
       </section>
 
