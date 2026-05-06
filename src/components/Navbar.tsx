@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { TrendingUp, Menu, X, Sun, Moon, Languages, LogOut, LayoutGrid } from 'lucide-react';
+import { Menu, X, Sun, Moon, Languages, LogOut, LayoutGrid, ChevronDown, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
@@ -27,39 +27,33 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
-      {/* Beta Banner */}
-      <div className="bg-indigo-600 text-white text-center py-2 px-4 text-sm font-medium">
-        🎉 {language === 'zh'
-          ? '现已开放内测，所有功能完全免费使用，欢迎体验并反馈建议！'
-          : 'Now in Beta — All features are completely free. Try it out and share your feedback!'}
-      </div>
-      <div className="bg-[var(--bg-main)]/80 backdrop-blur-md border-b border-[var(--border-subtle)]">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-main)] border-b border-[var(--border-subtle)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center gap-2">
-            <Link to="/" className="flex items-center gap-2">
-              <TradeGrailLogo className="w-8 h-8" />
-              <span className="text-xl font-bold tracking-tight text-[var(--text-main)]">TradeGrail</span>
-            </Link>
-          </div>
+        <div className="flex items-center h-[72px] gap-8">
 
-          <div className="hidden md:flex items-center gap-6">
-            <div 
-              className="relative py-4"
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2.5 shrink-0">
+            <TradeGrailLogo className="w-8 h-8" />
+            <span className="text-[17px] font-bold tracking-tight text-[var(--text-main)]">TradeGrail</span>
+          </Link>
+
+          {/* Center nav links */}
+          <div className="hidden md:flex items-center gap-1 flex-1">
+            {/* Features dropdown */}
+            <div
+              className="relative"
               onMouseEnter={() => setShowMegaMenu(true)}
               onMouseLeave={() => setShowMegaMenu(false)}
             >
-              <button className="text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors flex items-center gap-1">
+              <button className="flex items-center gap-1 px-3 py-2 text-[14px] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors rounded-md hover:bg-[var(--border-subtle)]">
                 {t('nav.features')}
-                <motion.div
+                <motion.span
                   animate={{ rotate: showMegaMenu ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.18 }}
+                  className="inline-flex"
                 >
-                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </motion.div>
+                  <ChevronDown className="w-3.5 h-3.5" />
+                </motion.span>
               </button>
 
               <AnimatePresence>
@@ -69,91 +63,154 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            <Link to="/pricing" className="text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">{t('nav.pricing')}</Link>
-            
-            {user ? (
-              <>
-                <Link to="/dashboard" className="flex items-center gap-2 text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">
-                  <LayoutGrid className="w-4 h-4" />
-                  {t('features.showcase.dashboard.label')}
-                </Link>
-                <button onClick={handleLogout} className="flex items-center gap-2 text-sm font-medium text-[var(--text-muted)] hover:text-red-500 transition-colors">
-                  <LogOut className="w-4 h-4" />
-                  {t('nav.logout') || '退出'}
-                </button>
-              </>
-            ) : (
-              <>
-                <Link to="/login" className="text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">{t('nav.login')}</Link>
-                <Link to="/signup" className="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-brand-primary/90 transition-colors">
-                  {t('nav.signup')}
-                </Link>
-              </>
-            )}
-            
-            <div className="flex items-center gap-2">
-              <button 
-                onClick={toggleLanguage}
-                className="flex items-center gap-1 p-2 rounded-lg bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)] hover:bg-[var(--border-subtle)] transition-colors text-xs font-bold"
-              >
-                <Languages className="w-4 h-4" />
-                <span>{language === 'zh' ? 'EN' : '中文'}</span>
-              </button>
+            <Link
+              to="/pricing"
+              className="px-3 py-2 text-[14px] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors rounded-md hover:bg-[var(--border-subtle)]"
+            >
+              {t('nav.pricing')}
+            </Link>
 
-              <button 
-                onClick={toggleTheme}
-                className="p-2 rounded-lg bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)] hover:bg-[var(--border-subtle)] transition-colors"
+            {user && (
+              <Link
+                to="/dashboard"
+                className="flex items-center gap-1.5 px-3 py-2 text-[14px] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors rounded-md hover:bg-[var(--border-subtle)]"
               >
-                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
-            </div>
+                <LayoutGrid className="w-3.5 h-3.5" />
+                {t('features.showcase.dashboard.label')}
+              </Link>
+            )}
           </div>
 
-          <div className="md:hidden flex items-center gap-3">
-            <button 
+          {/* Right side */}
+          <div className="hidden md:flex items-center gap-2 ml-auto">
+            {/* Language + Theme toggles */}
+            <button
               onClick={toggleLanguage}
-              className="p-2 rounded-lg bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)]"
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-md text-[13px] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--border-subtle)] transition-colors"
             >
-              <Languages className="w-4 h-4" />
+              <Languages className="w-3.5 h-3.5" />
+              <span>{language === 'zh' ? 'EN' : '中文'}</span>
             </button>
-            <button 
+
+            <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)]"
+              className="p-1.5 rounded-md text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--border-subtle)] transition-colors"
             >
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
-            <button onClick={() => setIsOpen(!isOpen)} className="text-[var(--text-main)]">
-              {isOpen ? <X /> : <Menu />}
+
+            <div className="w-px h-5 bg-[var(--border-subtle)] mx-1" />
+
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-1.5 px-3 py-2 text-[14px] font-medium text-[var(--text-muted)] hover:text-red-500 transition-colors rounded-md"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                {t('nav.logout') || '退出'}
+              </button>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-[14px] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors"
+                >
+                  {t('nav.login')}
+                </Link>
+                <Link
+                  to="/signup"
+                  className="flex items-center gap-1.5 bg-[#6366f1] hover:bg-[#4f46e5] text-white px-4 py-2 rounded-lg text-[14px] font-semibold transition-colors"
+                >
+                  {language === 'zh' ? '免费开始' : 'Get Started'}
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </>
+            )}
+          </div>
+
+          {/* Mobile right */}
+          <div className="md:hidden flex items-center gap-2 ml-auto">
+            <button
+              onClick={toggleLanguage}
+              className="p-2 rounded-md text-[var(--text-muted)] hover:bg-[var(--border-subtle)]"
+            >
+              <Languages className="w-4 h-4" />
+            </button>
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-md text-[var(--text-muted)] hover:bg-[var(--border-subtle)]"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-[var(--text-main)]">
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-[var(--bg-main)] border-b border-[var(--border-subtle)] px-4 py-4 space-y-4"
-        >
-          <a href="/#features" className="block text-sm font-medium text-[var(--text-muted)]" onClick={() => setIsOpen(false)}>{t('nav.features')}</a>
-          <Link to="/pricing" className="block text-sm font-medium text-[var(--text-muted)]" onClick={() => setIsOpen(false)}>{t('nav.pricing')}</Link>
-          {user ? (
-            <>
-              <Link to="/dashboard" className="block text-sm font-medium text-[var(--text-muted)]">{t('features.showcase.dashboard.label')}</Link>
-              <button onClick={handleLogout} className="block text-sm font-medium text-red-500">{t('nav.logout') || '退出'}</button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="block text-sm font-medium text-[var(--text-muted)]">{t('nav.login')}</Link>
-              <Link to="/signup" className="block bg-brand-primary text-white px-4 py-2 rounded-lg text-sm font-bold text-center">
-                {t('nav.signup')}
-              </Link>
-            </>
-          )}
-        </motion.div>
-      )}
-    </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.15 }}
+            className="md:hidden bg-[var(--bg-main)] border-b border-[var(--border-subtle)] px-4 py-4 space-y-1"
+          >
+            <a
+              href="/#features"
+              className="block px-3 py-2.5 text-[14px] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]"
+              onClick={() => setIsOpen(false)}
+            >
+              {t('nav.features')}
+            </a>
+            <Link
+              to="/pricing"
+              className="block px-3 py-2.5 text-[14px] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]"
+              onClick={() => setIsOpen(false)}
+            >
+              {t('nav.pricing')}
+            </Link>
+            {user ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="block px-3 py-2.5 text-[14px] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {t('features.showcase.dashboard.label')}
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-3 py-2.5 text-[14px] font-medium text-red-500 rounded-md hover:bg-red-50"
+                >
+                  {t('nav.logout') || '退出'}
+                </button>
+              </>
+            ) : (
+              <div className="pt-2 flex flex-col gap-2">
+                <Link
+                  to="/login"
+                  className="block px-3 py-2.5 text-[14px] font-medium text-[var(--text-muted)] text-center border border-[var(--border-subtle)] rounded-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {t('nav.login')}
+                </Link>
+                <Link
+                  to="/signup"
+                  className="flex items-center justify-center gap-1.5 bg-[#6366f1] text-white px-4 py-2.5 rounded-lg text-[14px] font-semibold"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {language === 'zh' ? '免费开始' : 'Get Started'}
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

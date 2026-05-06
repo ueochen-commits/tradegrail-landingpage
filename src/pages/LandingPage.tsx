@@ -41,7 +41,7 @@ export default function LandingPage() {
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
   return (
-    <div className="pt-16 overflow-x-hidden bg-[var(--bg-main)] text-[var(--text-main)] transition-colors duration-300 relative">
+    <div className="pt-[72px] overflow-x-hidden bg-[var(--bg-main)] text-[var(--text-main)] transition-colors duration-300 relative">
       <div className="fixed inset-0 pointer-events-none z-0">
         <BackgroundAnimation />
       </div>
