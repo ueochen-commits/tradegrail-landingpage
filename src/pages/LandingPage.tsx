@@ -61,9 +61,6 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-5 backdrop-blur-sm">
-              <Zap className="w-3 h-3 fill-current" /> {t('hero.badge')}
-            </span>
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-5 leading-[1.1] text-[var(--text-main)]">
               {t('hero.title')} <span className="text-brand-primary italic">{t('hero.title.accent')}</span>
             </h1>
