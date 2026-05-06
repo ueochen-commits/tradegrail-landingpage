@@ -13,7 +13,7 @@ export const ShowcaseSection = () => {
           <img
             src="/lddashboard.png"
             alt="TradeGrail Dashboard"
-            className="w-full h-auto block rounded-[2rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)]"
+            className="w-full h-auto block"
           />
         </motion.div>
       </div>
