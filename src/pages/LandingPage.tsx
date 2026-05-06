@@ -37,7 +37,6 @@ export default function LandingPage() {
   }, [theme]);
 
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
   return (
     <div className="pt-[72px] overflow-x-hidden bg-[var(--bg-main)] text-[var(--text-main)] transition-colors duration-300 relative">
@@ -54,8 +53,8 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="relative flex items-center justify-center pt-10 pb-0 z-10">
         <motion.div
-          style={{ opacity, scale }}
-          className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pb-0"
+          style={{ opacity }}
+          className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
         >
           <motion.div
             initial={{ opacity: 0, y: 16 }}
