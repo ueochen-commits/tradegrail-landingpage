@@ -28,7 +28,7 @@ export const ShowcaseSection = () => {
           <img
             src="/lddashboard.png"
             alt="TradeGrail Dashboard"
-            className="w-full h-auto block -mt-12"
+            className="w-full h-auto block"
           />
         </motion.div>
       </section>
