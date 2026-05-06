@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 
 export const ShowcaseSection = () => {
   return (
-    <section className="pt-5 pb-24 relative overflow-hidden z-10">
+    <section className="pt-1 pb-24 relative overflow-hidden z-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

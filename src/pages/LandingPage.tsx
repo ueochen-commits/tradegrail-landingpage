@@ -52,7 +52,7 @@ export default function LandingPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative flex items-center justify-center pt-10 pb-2 z-10">
+      <section className="relative flex items-center justify-center pt-10 pb-0 z-10">
         <motion.div
           style={{ opacity, scale }}
           className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
