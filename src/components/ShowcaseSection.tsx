@@ -1,67 +1,87 @@
 import { motion } from 'motion/react';
 
 const BROKER_LOGOS = [
-  { src: '/1.png', alt: 'Broker 1' },
-  { src: '/2.png', alt: 'Broker 2' },
-  { src: '/3.png', alt: 'Broker 3' },
-  { src: '/5.png', alt: 'Broker 5' },
-  { src: '/6.png', alt: 'Broker 6' },
-  { src: '/7.png', alt: 'Broker 7' },
-  { src: '/8.png', alt: 'Broker 8' },
-  { src: '/9.png', alt: 'Broker 9' },
+  '/broker-1.png',
+  '/broker-2.png',
+  '/broker-3.png',
+  '/broker-5.png',
+  '/broker-6.png',
+  '/broker-7.png',
+  '/broker-8.png',
+  '/broker-9.png',
 ];
 
 export const ShowcaseSection = () => {
-  // 复制两遍实现无缝循环
-  const logos = [...BROKER_LOGOS, ...BROKER_LOGOS];
+  // 三倍复制保证无缝循环
+  const track = [...BROKER_LOGOS, ...BROKER_LOGOS, ...BROKER_LOGOS];
 
   return (
-    <section className="pt-0 pb-16 relative overflow-hidden z-10">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <img
-          src="/lddashboard.png"
-          alt="TradeGrail Dashboard"
-          className="w-full h-auto block -mt-12"
-        />
-      </motion.div>
+    <>
+      {/* 仪表盘截图 — 位置不变 */}
+      <section className="pt-0 pb-0 relative overflow-hidden z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <img
+            src="/lddashboard.png"
+            alt="TradeGrail Dashboard"
+            className="w-full h-auto block -mt-12"
+          />
+        </motion.div>
+      </section>
 
-      {/* Stats + Broker Logos */}
-      <div className="mt-10 text-center">
-        {/* 统计数据 */}
-        <p className="text-sm text-[var(--text-muted)]">
-          内测期间已记录 <span className="font-semibold text-[var(--text-main)]">12,847</span> 笔交易 · 来自 <span className="font-semibold text-[var(--text-main)]">23</span> 个国家的 <span className="font-semibold text-[var(--text-main)]">847</span> 名交易者
+      {/* 统计数据 + 经纪商 logo 滚动 */}
+      <section className="pt-10 pb-16 relative z-10">
+        {/* 统计文字 */}
+        <p className="text-center text-sm text-[var(--text-muted)]">
+          内测期间已记录{' '}
+          <span className="font-semibold text-[var(--text-main)]">12,847</span>{' '}
+          笔交易 · 来自{' '}
+          <span className="font-semibold text-[var(--text-main)]">23</span>{' '}
+          个国家的{' '}
+          <span className="font-semibold text-[var(--text-main)]">847</span>{' '}
+          名交易者
         </p>
 
-        {/* 券商标题 */}
-        <p className="mt-5 text-sm font-medium text-[var(--text-muted)]">
+        {/* 副标题 */}
+        <p className="mt-4 text-center text-sm font-medium text-[var(--text-muted)]">
           已支持以下券商，自动同步交易数据
         </p>
 
-        {/* 滚动 Logo 跑马灯 */}
-        <div className="relative mt-6 overflow-hidden">
-          {/* 左侧渐变遮罩 */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[var(--bg-main)] to-transparent z-10 pointer-events-none" />
-          {/* 右侧渐变遮罩 */}
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[var(--bg-main)] to-transparent z-10 pointer-events-none" />
+        {/* Logo 跑马灯 */}
+        <div className="relative mt-8 overflow-hidden max-w-4xl mx-auto">
+          {/* 左侧渐隐 */}
+          <div className="absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-[var(--bg-main)] to-transparent z-10 pointer-events-none" />
+          {/* 右侧渐隐 */}
+          <div className="absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-[var(--bg-main)] to-transparent z-10 pointer-events-none" />
 
-          <div className="flex animate-marquee-slow gap-12 items-center w-max">
-            {logos.map((logo, i) => (
-              <div key={i} className="flex items-center justify-center h-10 w-24 shrink-0">
+          {/* 滚动轨道 */}
+          <div
+            className="flex items-center"
+            style={{
+              animation: 'brokerScroll 28s linear infinite',
+              width: 'max-content',
+            }}
+          >
+            {track.map((src, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-center shrink-0 px-8"
+                style={{ width: '160px', height: '56px' }}
+              >
                 <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="max-h-10 max-w-[96px] w-auto h-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+                  src={src}
+                  alt={`broker-${i}`}
+                  className="max-h-10 max-w-[120px] w-auto h-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-200"
                 />
               </div>
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };

@@ -48,6 +48,10 @@
   .animate-marquee-slow {
     animation: marquee 40s linear infinite;
   }
+  @keyframes brokerScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.333%); }
+  }
 
   .no-scrollbar::-webkit-scrollbar {
     display: none;
