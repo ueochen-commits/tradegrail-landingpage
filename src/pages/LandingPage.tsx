@@ -7,7 +7,6 @@ import { cn } from '../lib/utils';
 import { FeatureShowcase } from '../components/FeatureShowcase';
 import { Footer } from '../components/Footer';
 import { BackgroundAnimation } from '../components/BackgroundAnimation';
-import { InteractiveMockup } from '../components/InteractiveMockup';
 import { Testimonials } from '../components/Testimonials';
 import { ShowcaseSection } from '../components/ShowcaseSection';
 import { useLanguage } from '../context/LanguageContext';
@@ -222,52 +221,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Interactive Mockup Section */}
-      <section className="py-32 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <FadeInWhenVisible>
-              <h2 className="text-5xl font-bold mb-8 leading-tight">{t('mockup.title')} <br /><span className="text-brand-primary">{t('mockup.title.accent')}</span></h2>
-              <p className="text-[var(--text-muted)] text-xl mb-12 leading-relaxed">
-                {t('mockup.desc')}
-              </p>
-              <div className="space-y-6">
-                {[t('mockup.feature1'), t('mockup.feature2'), t('mockup.feature3')].map((item, i) => (
-                  <div key={i} className="flex items-center gap-4">
-                    <div className="w-6 h-6 rounded-full bg-brand-primary/20 flex items-center justify-center">
-                      <CheckCircle2 className="w-4 h-4 text-brand-primary" />
-                    </div>
-                    <span className="font-medium">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </FadeInWhenVisible>
-
-            <motion.div 
-              initial={{ x: 100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              className="relative lg:h-[600px] w-full"
-            >
-              <div className="absolute -inset-10 bg-brand-primary/20 blur-[120px] rounded-full opacity-20 animate-pulse" />
-              <div className="absolute -inset-10 bg-indigo-500/10 blur-[100px] rounded-full opacity-20 bottom-0 right-0" />
-              
-              <div className="relative h-full w-full bg-[var(--card-bg)] border border-[var(--border-subtle)] rounded-[3.5rem] p-4 shadow-2xl overflow-hidden group transition-colors duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--text-main)]/[0.02] to-transparent pointer-events-none" />
-                <InteractiveMockup />
-                
-                {/* Decorative Elements */}
-                <div className="absolute top-8 right-8 w-2 h-2 rounded-full bg-brand-primary animate-ping" />
-                <div className="absolute bottom-8 left-8 flex gap-1">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[var(--text-main)]/20" />
-                  <div className="w-1.5 h-1.5 rounded-full bg-[var(--text-main)]/20" />
-                  <div className="w-1.5 h-1.5 rounded-full bg-[var(--text-main)]/20" />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
 
       {/* Mobile App Section */}
