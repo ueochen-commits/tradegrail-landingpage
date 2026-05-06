@@ -366,8 +366,8 @@ export const ShowcaseSection = () => {
                           <AreaChart data={equityData}>
                             <defs>
                               <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#3D3A8C" stopOpacity={0.1}/>
-                                <stop offset="95%" stopColor="#3D3A8C" stopOpacity={0}/>
+                                <stop offset="5%" stopColor="#6366f1" stopOpacity={0.1}/>
+                                <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
                               </linearGradient>
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#f1f5f9'} />
@@ -375,12 +375,12 @@ export const ShowcaseSection = () => {
                             <YAxis hide domain={['dataMin - 1000', 'dataMax + 1000']} />
                             <Tooltip 
                               contentStyle={{ backgroundColor: theme === 'dark' ? '#151921' : '#fff', borderRadius: '12px', border: theme === 'dark' ? '1px solid rgba(255,255,255,0.1)' : '1px solid #e2e8f0', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}
-                              itemStyle={{ fontWeight: 'bold', color: '#3D3A8C' }}
+                              itemStyle={{ fontWeight: 'bold', color: '#6366f1' }}
                             />
                             <Area 
                               type="monotone" 
                               dataKey="value" 
-                              stroke="#3D3A8C" 
+                              stroke="#6366f1" 
                               strokeWidth={3} 
                               fillOpacity={1} 
                               fill="url(#colorValue)" 
@@ -487,7 +487,7 @@ export const ShowcaseSection = () => {
                   <div className="relative w-20 h-20 flex items-center justify-center">
                     <svg className="w-full h-full -rotate-90">
                       <circle cx="40" cy="40" r="34" fill="none" stroke={theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#f1f5f9'} strokeWidth="6" />
-                      <circle cx="40" cy="40" r="34" fill="none" stroke="#3D3A8C" strokeWidth="6" strokeDasharray="213" strokeDashoffset="0" />
+                      <circle cx="40" cy="40" r="34" fill="none" stroke="#6366f1" strokeWidth="6" strokeDasharray="213" strokeDashoffset="0" />
                     </svg>
                     <span className="absolute text-sm font-black text-[var(--text-main)]">100%</span>
                   </div>

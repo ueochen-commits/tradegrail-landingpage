@@ -74,7 +74,7 @@ export default function LandingPage() {
               {t('hero.desc')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Link to="/signup" className="w-full sm:w-auto bg-brand-primary text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-brand-primary/90 transition-all flex items-center justify-center gap-3 group shadow-[0_0_30px_-5px_rgba(99,102,241,0.5)]">
+              <Link to="/signup" className="w-full sm:w-auto bg-gradient-to-r from-[#2b276f] to-[#3a33a9] hover:from-[#332e88] hover:to-[#4540c0] text-white px-10 py-5 rounded-2xl text-lg font-bold transition-all flex items-center justify-center gap-3 group shadow-[0_0_30px_-5px_rgba(58,51,169,0.5)]">
                 {t('hero.cta')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link to="/login" className="w-full sm:w-auto bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)] px-10 py-5 rounded-2xl text-lg font-bold hover:bg-[var(--border-subtle)] transition-all backdrop-blur-md">

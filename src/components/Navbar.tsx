@@ -230,7 +230,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   to="/signup"
-                  className="flex items-center gap-1.5 bg-[#3D3A8C] hover:bg-[#2D2A7A] text-white px-5 py-2 rounded-lg text-[16px] font-semibold transition-colors"
+                  className="flex items-center gap-1.5 bg-gradient-to-r from-[#2b276f] to-[#3a33a9] hover:from-[#332e88] hover:to-[#4540c0] text-white px-5 py-2 rounded-lg text-[16px] font-semibold transition-all"
                 >
                   {language === 'zh' ? '免费开始' : 'Get Started'}
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -293,7 +293,7 @@ export default function Navbar() {
                 <Link to="/login" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] text-center border border-[var(--border-subtle)] rounded-lg" onClick={() => setIsOpen(false)}>
                   {t('nav.login')}
                 </Link>
-                <Link to="/signup" className="flex items-center justify-center gap-1.5 bg-[#3D3A8C] text-white px-4 py-2.5 rounded-lg text-[15px] font-semibold" onClick={() => setIsOpen(false)}>
+                <Link to="/signup" className="flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#2b276f] to-[#3a33a9] text-white px-4 py-2.5 rounded-lg text-[15px] font-semibold" onClick={() => setIsOpen(false)}>
                   {language === 'zh' ? '免费开始' : 'Get Started'}
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>

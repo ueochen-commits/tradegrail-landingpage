@@ -54,12 +54,12 @@ export const FeaturesMegaMenu: React.FC<MegaMenuProps> = ({ onClose }) => {
             </div>
             <div className="flex items-end gap-1 h-12 mb-2">
               <svg viewBox="0 0 100 40" className="w-full h-full overflow-visible">
-                <path d="M0,35 Q10,30 20,32 T40,20 T60,25 T80,10 T100,15" fill="none" stroke="#3D3A8C" strokeWidth="2" />
+                <path d="M0,35 Q10,30 20,32 T40,20 T60,25 T80,10 T100,15" fill="none" stroke="#6366f1" strokeWidth="2" />
                 <path d="M0,35 Q10,30 20,32 T40,20 T60,25 T80,10 T100,15 L100,40 L0,40 Z" fill="url(#grad1)" opacity="0.2" />
                 <defs>
                   <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#3D3A8C', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: '#3D3A8C', stopOpacity: 0 }} />
+                    <stop offset="0%" style={{ stopColor: '#6366f1', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: '#6366f1', stopOpacity: 0 }} />
                   </linearGradient>
                 </defs>
               </svg>
