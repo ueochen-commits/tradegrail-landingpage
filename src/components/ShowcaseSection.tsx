@@ -70,12 +70,12 @@ export const ShowcaseSection = () => {
               <div
                 key={i}
                 className="flex items-center justify-center shrink-0 px-8"
-                style={{ width: '160px', height: '56px' }}
+                style={{ width: '180px', height: '64px' }}
               >
                 <img
                   src={src}
                   alt={`broker-${i}`}
-                  className="max-h-10 max-w-[120px] w-auto h-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-200"
+                  className="max-h-12 max-w-[140px] w-auto h-auto object-contain"
                 />
               </div>
             ))}
