@@ -39,7 +39,7 @@ function SimpleDropdown({ items, onClose }: { items: SimpleDropdownItem[]; onClo
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <span className="text-[14px] font-semibold text-[var(--text-main)] group-hover:text-[#6366f1] transition-colors">{item.label}</span>
+              <span className="text-[14px] font-semibold text-[var(--text-main)] group-hover:text-[#3D3A8C] transition-colors">{item.label}</span>
               {item.comingSoon && (
                 <span className="px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-500 text-[9px] font-bold uppercase tracking-wide">即将推出</span>
               )}
@@ -66,7 +66,7 @@ export default function Navbar() {
   const handleLogout = () => { logout(); navigate('/'); };
 
   // 导航链接统一样式：深色、15px、medium
-  const navLinkCls = "flex items-center gap-1 px-3 py-2 text-[16px] font-semibold text-[var(--text-main)] hover:text-[#6366f1] transition-colors rounded-md hover:bg-[var(--border-subtle)] whitespace-nowrap";
+  const navLinkCls = "flex items-center gap-1 px-3 py-2 text-[16px] font-semibold text-[var(--text-main)] hover:text-[#3D3A8C] transition-colors rounded-md hover:bg-[var(--border-subtle)] whitespace-nowrap";
 
   const solutionItems: SimpleDropdownItem[] = [
     {
@@ -224,13 +224,13 @@ export default function Navbar() {
               <>
                 <Link
                   to="/login"
-                  className="px-4 py-2 text-[16px] font-semibold text-[var(--text-main)] hover:text-[#6366f1] transition-colors"
+                  className="px-4 py-2 text-[16px] font-semibold text-[var(--text-main)] hover:text-[#3D3A8C] transition-colors"
                 >
                   {t('nav.login')}
                 </Link>
                 <Link
                   to="/signup"
-                  className="flex items-center gap-1.5 bg-[#6366f1] hover:bg-[#4f46e5] text-white px-5 py-2 rounded-lg text-[16px] font-semibold transition-colors"
+                  className="flex items-center gap-1.5 bg-[#3D3A8C] hover:bg-[#2D2A7A] text-white px-5 py-2 rounded-lg text-[16px] font-semibold transition-colors"
                 >
                   {language === 'zh' ? '免费开始' : 'Get Started'}
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -293,7 +293,7 @@ export default function Navbar() {
                 <Link to="/login" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] text-center border border-[var(--border-subtle)] rounded-lg" onClick={() => setIsOpen(false)}>
                   {t('nav.login')}
                 </Link>
-                <Link to="/signup" className="flex items-center justify-center gap-1.5 bg-[#6366f1] text-white px-4 py-2.5 rounded-lg text-[15px] font-semibold" onClick={() => setIsOpen(false)}>
+                <Link to="/signup" className="flex items-center justify-center gap-1.5 bg-[#3D3A8C] text-white px-4 py-2.5 rounded-lg text-[15px] font-semibold" onClick={() => setIsOpen(false)}>
                   {language === 'zh' ? '免费开始' : 'Get Started'}
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>

@@ -5,7 +5,7 @@
   --font-sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-brand-primary: #6366f1;
+  --color-brand-primary: #3D3A8C;
   --color-brand-secondary: #94a3b8;
 }
 
@@ -15,7 +15,7 @@
   --text-muted: #64748b;
   --card-bg: #ffffff;
   --border-subtle: rgba(0, 0, 0, 0.05);
-  --accent-glow: rgba(99, 102, 241, 0.05);
+  --accent-glow: rgba(61, 58, 140, 0.05);
   --sidebar-bg: #ffffff;
 }
 
@@ -25,7 +25,7 @@
   --text-muted: #94A3B8;
   --card-bg: #151921;
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --accent-glow: rgba(99, 102, 241, 0.1);
+  --accent-glow: rgba(61, 58, 140, 0.1);
   --sidebar-bg: #0B0E14;
 }
 

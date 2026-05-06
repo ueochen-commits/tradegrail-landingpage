@@ -118,8 +118,8 @@ export const InteractiveMockup = () => {
             <AreaChart data={equityData}>
               <defs>
                 <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#6366f1" stopOpacity={0.5}/>
-                  <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#3D3A8C" stopOpacity={0.5}/>
+                  <stop offset="95%" stopColor="#3D3A8C" stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border-subtle)" />
@@ -139,7 +139,7 @@ export const InteractiveMockup = () => {
               <Area 
                 type="monotone" 
                 dataKey="value" 
-                stroke="#6366f1" 
+                stroke="#3D3A8C" 
                 strokeWidth={4}
                 fillOpacity={1} 
                 fill="url(#colorValue)" 

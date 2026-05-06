@@ -294,8 +294,8 @@ export default function DashboardPage() {
                         <AreaChart data={chartData}>
                           <defs>
                             <linearGradient id="colorEquity" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3}/>
-                              <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+                              <stop offset="5%" stopColor="#3D3A8C" stopOpacity={0.3}/>
+                              <stop offset="95%" stopColor="#3D3A8C" stopOpacity={0}/>
                             </linearGradient>
                           </defs>
                           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
@@ -304,7 +304,7 @@ export default function DashboardPage() {
                           <Tooltip 
                             contentStyle={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-subtle)', borderRadius: '16px' }}
                           />
-                          <Area type="monotone" dataKey="equity" stroke="#6366f1" strokeWidth={4} fillOpacity={1} fill="url(#colorEquity)" />
+                          <Area type="monotone" dataKey="equity" stroke="#3D3A8C" strokeWidth={4} fillOpacity={1} fill="url(#colorEquity)" />
                         </AreaChart>
                       </ResponsiveContainer>
                     </div>
