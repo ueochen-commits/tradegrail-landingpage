@@ -113,16 +113,16 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-main)] border-b border-[var(--border-subtle)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-[72px] gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="flex items-center h-[72px]">
 
-          {/* Logo */}
+          {/* Logo — 左侧固定 */}
           <Link to="/" className="flex items-center shrink-0">
             <img src="/landingpage-logo.png" alt="TradeGrail" className="h-12 w-auto" />
           </Link>
 
-          {/* Center nav */}
-          <div className="hidden md:flex items-center gap-0.5 flex-1">
+          {/* Center nav — 绝对居中 */}
+          <div className="hidden md:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
 
             {/* 产品 — mega menu */}
             <div
