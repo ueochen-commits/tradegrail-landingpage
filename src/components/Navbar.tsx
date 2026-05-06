@@ -186,6 +186,11 @@ export default function Navbar() {
                 {language === 'zh' ? '控制台' : 'Dashboard'}
               </Link>
             )}
+
+            {/* 帮助与支持 */}
+            <a href="#" className={navLinkCls}>
+              {language === 'zh' ? '帮助与支持' : 'Help & Support'}
+            </a>
           </div>
 
           {/* Right side */}
@@ -270,6 +275,9 @@ export default function Navbar() {
             </Link>
             <a href="#" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
               {t('nav.resources')}
+            </a>
+            <a href="#" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
+              {language === 'zh' ? '帮助与支持' : 'Help & Support'}
             </a>
             {user ? (
               <>
