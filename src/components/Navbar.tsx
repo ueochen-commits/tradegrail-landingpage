@@ -1,10 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, Sun, Moon, Languages, LogOut, LayoutGrid, ChevronDown, ArrowRight, BookOpen, HelpCircle, PlayCircle, Bitcoin, BarChart2, Users } from 'lucide-react';
+import { Menu, X, LogOut, LayoutGrid, ChevronDown, ArrowRight, BookOpen, HelpCircle, PlayCircle, Bitcoin, BarChart2, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
-import { useTheme } from '../context/ThemeContext';
 import { TradeGrailLogo } from './Logo';
 import { FeaturesMegaMenu } from './FeaturesMegaMenu';
 
@@ -57,12 +56,11 @@ export default function Navbar() {
   const [showMegaMenu, setShowMegaMenu] = useState(false);
   const [showSolutions, setShowSolutions] = useState(false);
   const [showResources, setShowResources] = useState(false);
-  const { language, setLanguage, t } = useLanguage();
+  const { t } = useLanguage();
   const { user, logout } = useAuth();
-  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
-  const toggleLanguage = () => setLanguage(language === 'zh' ? 'en' : 'zh');
+  
   const handleLogout = () => { logout(); navigate('/'); };
 
   // 导航链接统一样式：深色、15px、medium
@@ -183,35 +181,18 @@ export default function Navbar() {
             {user && (
               <Link to="/dashboard" className={navLinkCls}>
                 <LayoutGrid className="w-3.5 h-3.5" />
-                {language === 'zh' ? '控制台' : 'Dashboard'}
+                {'控制台'}
               </Link>
             )}
 
             {/* 帮助与支持 */}
             <a href="#" className={navLinkCls}>
-              {language === 'zh' ? '帮助与支持' : 'Help & Support'}
+              {'帮助与支持'}
             </a>
           </div>
 
           {/* Right side */}
           <div className="hidden md:flex items-center gap-1.5 ml-auto">
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-md text-[13px] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--border-subtle)] transition-colors"
-            >
-              <Languages className="w-3.5 h-3.5" />
-              <span>{language === 'zh' ? 'EN' : '中文'}</span>
-            </button>
-
-            <button
-              onClick={toggleTheme}
-              className="p-1.5 rounded-md text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--border-subtle)] transition-colors"
-            >
-              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
-
-            <div className="w-px h-5 bg-[var(--border-subtle)] mx-1" />
-
             {user ? (
               <button
                 onClick={handleLogout}
@@ -232,7 +213,7 @@ export default function Navbar() {
                   to="/signup"
                   className="flex items-center gap-1.5 bg-gradient-to-r from-[#2b276f] to-[#3a33a9] hover:from-[#332e88] hover:to-[#4540c0] text-white px-5 py-2 rounded-lg text-[16px] font-semibold transition-all"
                 >
-                  {language === 'zh' ? '免费开始' : 'Get Started'}
+                  {'免费开始'}
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </>
@@ -241,12 +222,6 @@ export default function Navbar() {
 
           {/* Mobile right */}
           <div className="md:hidden flex items-center gap-2 ml-auto">
-            <button onClick={toggleLanguage} className="p-2 rounded-md text-[var(--text-muted)] hover:bg-[var(--border-subtle)]">
-              <Languages className="w-4 h-4" />
-            </button>
-            <button onClick={toggleTheme} className="p-2 rounded-md text-[var(--text-muted)] hover:bg-[var(--border-subtle)]">
-              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
             <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-[var(--text-main)]">
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -277,12 +252,12 @@ export default function Navbar() {
               {t('nav.resources')}
             </a>
             <a href="#" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
-              {language === 'zh' ? '帮助与支持' : 'Help & Support'}
+              {'帮助与支持'}
             </a>
             {user ? (
               <>
                 <Link to="/dashboard" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
-                  {language === 'zh' ? '控制台' : 'Dashboard'}
+                  {'控制台'}
                 </Link>
                 <button onClick={handleLogout} className="block w-full text-left px-3 py-2.5 text-[15px] font-medium text-red-500 rounded-md hover:bg-red-50">
                   {t('nav.logout')}
@@ -294,7 +269,7 @@ export default function Navbar() {
                   {t('nav.login')}
                 </Link>
                 <Link to="/signup" className="flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#2b276f] to-[#3a33a9] text-white px-4 py-2.5 rounded-lg text-[15px] font-semibold" onClick={() => setIsOpen(false)}>
-                  {language === 'zh' ? '免费开始' : 'Get Started'}
+                  {'免费开始'}
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
