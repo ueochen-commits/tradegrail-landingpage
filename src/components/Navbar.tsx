@@ -118,7 +118,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link to="/" className="flex items-center shrink-0">
-            <img src="/landingpage-logo.png" alt="TradeGrail" className="h-9 w-auto" />
+            <img src="/landingpage-logo.png" alt="TradeGrail" className="h-12 w-auto" />
           </Link>
 
           {/* Center nav */}
