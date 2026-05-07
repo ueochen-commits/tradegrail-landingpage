@@ -26,7 +26,7 @@ export const ShowcaseSection = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <img
-            src="/lddashboard.png"
+            src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E9%A6%96%E9%A1%B5%E8%90%BD%E5%9C%B0%E9%A1%B5%E7%9A%84%E8%BF%99%E4%B8%AA%E4%BB%AA%E8%A1%A8%E7%9B%98%E5%9B%BE"
             alt="TradeGrail Dashboard"
             className="w-full h-auto block"
           />
