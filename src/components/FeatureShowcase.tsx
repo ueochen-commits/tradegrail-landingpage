@@ -229,7 +229,11 @@ export const FeatureShowcase = () => {
                     ) : activeTab === 'analytics' ? (
                       <AnalysisMockup />
                     ) : activeTab === 'journal' ? (
-                      <JournalMockup />
+                      <img
+                        src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E6%97%A5%E5%BF%97%E6%88%AA%E5%9B%BE.png"
+                        alt="交互式交易日志"
+                        className="w-full h-full object-cover"
+                      />
                     ) : activeTab === 'notebook' ? (
                       <NotebookMockup />
                     ) : activeTab === 'reporting' ? (
