@@ -188,7 +188,7 @@ export const FeatureShowcase = () => {
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
               <img
-                src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E6%97%A5%E5%BF%97%E6%88%AA%E5%9B%BE.png"
+                src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E4%BA%A4%E6%98%93%E6%97%A5%E5%BF%97%E5%B1%95%E7%A4%BA%E5%9B%BE.png"
                 alt="交互式交易日志"
                 className="w-full h-auto rounded-[2rem]"
                 loading="eager"
