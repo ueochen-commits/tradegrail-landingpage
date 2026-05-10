@@ -179,22 +179,25 @@ export const FeatureShowcase = () => {
 
         {/* Content Area */}
         <div className="relative">
+          {/* 日志图片预加载并常驻 DOM，用 CSS 控制显隐，避免重复加载 */}
+          <div className={activeTab === 'journal' ? 'block' : 'hidden'}>
+            <motion.div
+              key="journal-img"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: activeTab === 'journal' ? 1 : 0, y: activeTab === 'journal' ? 0 : 20 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
+              <img
+                src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E6%97%A5%E5%BF%97%E6%88%AA%E5%9B%BE.png"
+                alt="交互式交易日志"
+                className="w-full h-auto rounded-[2rem]"
+                loading="eager"
+              />
+            </motion.div>
+          </div>
+
           <AnimatePresence mode="wait">
-            {activeTab === 'journal' ? (
-              <motion.div
-                key="journal"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              >
-                <img
-                  src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E6%97%A5%E5%BF%97%E6%88%AA%E5%9B%BE.png"
-                  alt="交互式交易日志"
-                  className="w-full h-auto rounded-[2rem]"
-                />
-              </motion.div>
-            ) : (
+            {activeTab !== 'journal' && (
             <motion.div
               key={activeTab}
               initial={{ opacity: 0, y: 20 }}
