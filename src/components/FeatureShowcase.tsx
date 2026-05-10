@@ -180,6 +180,21 @@ export const FeatureShowcase = () => {
         {/* Content Area */}
         <div className="relative">
           <AnimatePresence mode="wait">
+            {activeTab === 'journal' ? (
+              <motion.div
+                key="journal"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              >
+                <img
+                  src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E6%97%A5%E5%BF%97%E6%88%AA%E5%9B%BE.png"
+                  alt="交互式交易日志"
+                  className="w-full h-auto rounded-[2rem]"
+                />
+              </motion.div>
+            ) : (
             <motion.div
               key={activeTab}
               initial={{ opacity: 0, y: 20 }}
@@ -228,12 +243,6 @@ export const FeatureShowcase = () => {
                       <DashboardMockup />
                     ) : activeTab === 'analytics' ? (
                       <AnalysisMockup />
-                    ) : activeTab === 'journal' ? (
-                      <img
-                        src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E6%97%A5%E5%BF%97%E6%88%AA%E5%9B%BE.png"
-                        alt="交互式交易日志"
-                        className="w-full h-full object-cover"
-                      />
                     ) : activeTab === 'notebook' ? (
                       <NotebookMockup />
                     ) : activeTab === 'reporting' ? (
@@ -242,7 +251,6 @@ export const FeatureShowcase = () => {
                       <PlaybookMockup />
                     ) : (
                       <div className="w-full h-full p-8 flex flex-col bg-[var(--bg-main)]">
-                        {/* Fallback stylized dashboard for other tabs */}
                         <div className="flex items-center justify-between mb-8">
                           <div className="flex gap-2">
                             <div className="w-3 h-3 rounded-full bg-red-500/20" />
@@ -270,13 +278,14 @@ export const FeatureShowcase = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   {/* Decorative Elements */}
                   <div className="absolute -top-6 -right-6 w-32 h-32 bg-brand-primary/10 blur-3xl rounded-full" />
                   <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-brand-primary/10 blur-3xl rounded-full" />
                 </div>
               </div>
             </motion.div>
+            )}
           </AnimatePresence>
         </div>
       </div>
