@@ -14,7 +14,6 @@ import {
   LayoutGrid
 } from 'lucide-react';
 import { cn } from '../lib/utils';
-import { AnalysisMockup } from './AnalysisMockup';
 import { DashboardMockup } from './DashboardMockup';
 import { JournalMockup } from './JournalMockup';
 import { ReportsMockup } from './ReportsMockup';
@@ -212,8 +211,25 @@ export const FeatureShowcase = () => {
             </motion.div>
           </div>
 
+          {/* 分析复盘图片 */}
+          <div className={activeTab === 'analytics' ? 'block' : 'hidden'}>
+            <motion.div
+              key="analytics-img"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: activeTab === 'analytics' ? 1 : 0, y: activeTab === 'analytics' ? 0 : 20 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
+              <img
+                src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E5%88%86%E6%9E%90%E5%A4%8D%E7%9B%98%E9%A1%B5%E9%9D%A2%E6%88%AA%E5%9B%BE.png"
+                alt="精准交易分析"
+                className="w-full h-auto rounded-[2rem]"
+                loading="eager"
+              />
+            </motion.div>
+          </div>
+
           <AnimatePresence mode="wait">
-            {activeTab !== 'journal' && activeTab !== 'notebook' && (
+            {activeTab !== 'journal' && activeTab !== 'notebook' && activeTab !== 'analytics' && (
             <motion.div
               key={activeTab}
               initial={{ opacity: 0, y: 20 }}
@@ -260,8 +276,6 @@ export const FeatureShowcase = () => {
                   <div className="relative aspect-[16/10] rounded-2xl bg-[var(--bg-main)] border border-[var(--border-subtle)] shadow-2xl overflow-hidden">
                     {activeTab === 'dashboard' ? (
                       <DashboardMockup />
-                    ) : activeTab === 'analytics' ? (
-                      <AnalysisMockup />
                     ) : activeTab === 'reporting' ? (
                       <ReportsMockup />
                     ) : activeTab === 'playbook' ? (
