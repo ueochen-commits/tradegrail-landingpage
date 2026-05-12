@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { AnalysisMockup } from './AnalysisMockup';
-import { NotebookMockup } from './NotebookMockup';
 import { DashboardMockup } from './DashboardMockup';
 import { JournalMockup } from './JournalMockup';
 import { ReportsMockup } from './ReportsMockup';
@@ -196,8 +195,25 @@ export const FeatureShowcase = () => {
             </motion.div>
           </div>
 
+          {/* 笔记本图片 */}
+          <div className={activeTab === 'notebook' ? 'block' : 'hidden'}>
+            <motion.div
+              key="notebook-img"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: activeTab === 'notebook' ? 1 : 0, y: activeTab === 'notebook' ? 0 : 20 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
+              <img
+                src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA%E6%88%AA%E5%9B%BE.png"
+                alt="智能交易笔记"
+                className="w-full h-auto rounded-[2rem]"
+                loading="eager"
+              />
+            </motion.div>
+          </div>
+
           <AnimatePresence mode="wait">
-            {activeTab !== 'journal' && (
+            {activeTab !== 'journal' && activeTab !== 'notebook' && (
             <motion.div
               key={activeTab}
               initial={{ opacity: 0, y: 20 }}
@@ -246,8 +262,6 @@ export const FeatureShowcase = () => {
                       <DashboardMockup />
                     ) : activeTab === 'analytics' ? (
                       <AnalysisMockup />
-                    ) : activeTab === 'notebook' ? (
-                      <NotebookMockup />
                     ) : activeTab === 'reporting' ? (
                       <ReportsMockup />
                     ) : activeTab === 'playbook' ? (
