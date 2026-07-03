@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { TrendingUp, ArrowRight, CheckCircle2, BarChart3, Zap, Target, Shield, Globe, Cpu, MousePointer2, X, Sun, Moon } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { TradeGrailLogo } from '../components/Logo';
 import React from 'react';
 import { cn } from '../lib/utils';
@@ -68,12 +67,12 @@ export default function LandingPage() {
               {t('hero.desc')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link to="/signup" className="w-full sm:w-auto bg-gradient-to-r from-[#2b276f] to-[#3a33a9] hover:from-[#332e88] hover:to-[#4540c0] text-white px-8 py-3.5 rounded-xl text-base font-bold transition-all flex items-center justify-center gap-2 group shadow-[0_0_24px_-4px_rgba(58,51,169,0.45)]">
+              <a href="https://dashboard.tradegrail.net?auth=signup" className="w-full sm:w-auto bg-gradient-to-r from-[#2b276f] to-[#3a33a9] hover:from-[#332e88] hover:to-[#4540c0] text-white px-8 py-3.5 rounded-xl text-base font-bold transition-all flex items-center justify-center gap-2 group shadow-[0_0_24px_-4px_rgba(58,51,169,0.45)]">
                 {t('hero.cta')} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link to="/login" className="w-full sm:w-auto bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)] px-8 py-3.5 rounded-xl text-base font-bold hover:bg-[var(--border-subtle)] transition-all">
+              </a>
+              <a href="https://dashboard.tradegrail.net?auth=login" className="w-full sm:w-auto bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)] px-8 py-3.5 rounded-xl text-base font-bold hover:bg-[var(--border-subtle)] transition-all">
                 {t('hero.demo')}
-              </Link>
+              </a>
             </div>
           </motion.div>
         </motion.div>
@@ -430,15 +429,15 @@ export default function LandingPage() {
                     </li>
                   ))}
                 </ul>
-                <Link 
-                  to="/signup" 
+                <a
+                  href="https://dashboard.tradegrail.net?auth=signup"
                   className={cn(
                     "w-full py-4 rounded-2xl font-bold transition-all text-center",
                     plan.popular ? "bg-brand-primary text-white hover:bg-brand-primary/90" : "bg-[var(--border-subtle)] text-[var(--text-main)] hover:bg-[var(--border-subtle)]"
                   )}
                 >
                   {plan.cta}
-                </Link>
+                </a>
               </motion.div>
             ))}
           </div>

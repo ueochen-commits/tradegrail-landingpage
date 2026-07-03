@@ -69,12 +69,12 @@ export const Footer = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                <Link 
-                  to="/signup" 
+                <a
+                  href="https://dashboard.tradegrail.net?auth=signup"
                   className="inline-flex items-center gap-3 bg-[#3D3A8C] text-white px-12 py-5 rounded-2xl text-xl font-bold hover:bg-[#2D2A7A] transition-all active:scale-95 shadow-[0_0_40px_rgba(61,58,140,0.4)] hover:shadow-[0_0_60px_rgba(61,58,140,0.6)]"
                 >
                   {t('footer.cta.button')} <ArrowRight className="w-6 h-6" />
-                </Link>
+                </a>
               </motion.div>
             </div>
 

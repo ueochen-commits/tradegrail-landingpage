@@ -179,10 +179,10 @@ export default function Navbar() {
             </div>
 
             {user && (
-              <Link to="/dashboard" className={navLinkCls}>
+              <a href="https://dashboard.tradegrail.net" className={navLinkCls}>
                 <LayoutGrid className="w-3.5 h-3.5" />
                 {'控制台'}
-              </Link>
+              </a>
             )}
 
             {/* 帮助与支持 */}
@@ -203,19 +203,19 @@ export default function Navbar() {
               </button>
             ) : (
               <>
-                <Link
-                  to="/login"
+                <a
+                  href="https://dashboard.tradegrail.net?auth=login"
                   className="px-4 py-2 text-[16px] font-semibold text-[var(--text-main)] hover:text-[#3D3A8C] transition-colors"
                 >
                   {t('nav.login')}
-                </Link>
-                <Link
-                  to="/signup"
+                </a>
+                <a
+                  href="https://dashboard.tradegrail.net?auth=signup"
                   className="flex items-center gap-1.5 bg-gradient-to-r from-[#2b276f] to-[#3a33a9] hover:from-[#332e88] hover:to-[#4540c0] text-white px-5 py-2 rounded-lg text-[16px] font-semibold transition-all"
                 >
                   {'免费开始'}
                   <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                </a>
               </>
             )}
           </div>
@@ -256,22 +256,22 @@ export default function Navbar() {
             </a>
             {user ? (
               <>
-                <Link to="/dashboard" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
+                <a href="https://dashboard.tradegrail.net" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
                   {'控制台'}
-                </Link>
+                </a>
                 <button onClick={handleLogout} className="block w-full text-left px-3 py-2.5 text-[15px] font-medium text-red-500 rounded-md hover:bg-red-50">
                   {t('nav.logout')}
                 </button>
               </>
             ) : (
               <div className="pt-2 flex flex-col gap-2">
-                <Link to="/login" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] text-center border border-[var(--border-subtle)] rounded-lg" onClick={() => setIsOpen(false)}>
+                <a href="https://dashboard.tradegrail.net?auth=login" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] text-center border border-[var(--border-subtle)] rounded-lg" onClick={() => setIsOpen(false)}>
                   {t('nav.login')}
-                </Link>
-                <Link to="/signup" className="flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#2b276f] to-[#3a33a9] text-white px-4 py-2.5 rounded-lg text-[15px] font-semibold" onClick={() => setIsOpen(false)}>
+                </a>
+                <a href="https://dashboard.tradegrail.net?auth=signup" className="flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#2b276f] to-[#3a33a9] text-white px-4 py-2.5 rounded-lg text-[15px] font-semibold" onClick={() => setIsOpen(false)}>
                   {'免费开始'}
                   <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                </a>
               </div>
             )}
           </motion.div>

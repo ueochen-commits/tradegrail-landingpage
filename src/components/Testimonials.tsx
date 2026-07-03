@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Star, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import { Link } from 'react-router-dom';
 
 interface Testimonial {
   name: string;
@@ -194,9 +193,9 @@ export const Testimonials: React.FC = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <Link to="/signup" className="inline-flex items-center gap-3 bg-brand-primary text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-brand-primary/90 transition-all group shadow-[0_0_40px_-10px_rgba(99,102,241,0.5)]">
+            <a href="https://dashboard.tradegrail.net?auth=signup" className="inline-flex items-center gap-3 bg-brand-primary text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-brand-primary/90 transition-all group shadow-[0_0_40px_-10px_rgba(99,102,241,0.5)]">
               {t('hero.cta')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
           </motion.div>
         </div>
       </div>
