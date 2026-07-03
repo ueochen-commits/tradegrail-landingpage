@@ -1,20 +1,98 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# TradeGrail Landing Page
 
-# Run and deploy your AI Studio app
+This repository contains the public marketing site for TradeGrail, a trading journal and performance review platform for active traders. The landing page presents the product, pricing, authentication entry points, and selected in-app previews that route users toward the main dashboard experience.
 
-This contains everything you need to run your app locally.
+Production site: https://www.tradegrail.net
 
-View your app in AI Studio: https://ai.studio/apps/97075ac5-1c73-4f0b-bed9-5e359f18378f
+## Product Role
 
-## Run Locally
+The landing page is the first touchpoint for new users. It is responsible for:
 
-**Prerequisites:**  Node.js
+- Explaining TradeGrail's trading journal and analytics workflow
+- Presenting product features, dashboards, reports, and playbook previews
+- Supporting pricing, checkout, login, and signup routes
+- Connecting users to the main TradeGrail dashboard experience
+- Sharing the same Supabase project configuration used by the broader product
 
+## Tech Stack
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- Supabase
+- Vercel
+- Motion
+- Recharts and D3 for visual previews
+- Express development server
+
+## Project Structure
+
+```text
+src/components/      Marketing sections, navigation, mockups, and shared UI
+src/context/         Auth, language, and theme providers
+src/lib/             Supabase client and utility helpers
+src/pages/           Landing, pricing, auth, checkout, and dashboard routes
+src/services/        API helpers
+server.ts            Local Express server and development middleware
+vite.config.ts       Vite, React, and Tailwind configuration
+vercel.json          Vercel routing configuration
+```
+
+## Local Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a local environment file:
+
+```bash
+cp .env.example .env
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+## Environment Variables
+
+Required variables are documented in `.env.example`.
+
+Common variables include:
+
+- `APP_URL`
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+- `GEMINI_API_KEY`
+
+Never commit real API keys or Supabase credentials.
+
+## Deployment
+
+The site is deployed on Vercel as the `tradegrail-landingpage` project.
+
+Useful commands:
+
+```bash
+vercel pull --environment=development
+vercel deploy
+vercel deploy --prod
+```
+
+Before production deployment, verify that the Supabase environment variables point to the correct TradeGrail project.
+
+## Scripts
+
+```bash
+npm run dev      # Start local development server
+npm run build    # Build production assets
+npm run preview  # Preview the production build locally
+npm run lint     # Type-check the project
+npm run clean    # Remove build output
+```
