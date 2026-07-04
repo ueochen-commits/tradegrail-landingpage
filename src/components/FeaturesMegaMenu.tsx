@@ -50,7 +50,7 @@ export const FeaturesMegaMenu: React.FC<MegaMenuProps> = ({ onClose }) => {
           <div className="bg-[var(--card-bg)]/80 backdrop-blur-sm rounded-lg border border-[var(--border-subtle)] p-3 shadow-sm">
             <div className="flex items-center gap-1 mb-2">
               <TrendingUp className="w-2 h-2 text-emerald-500" />
-              <span className="text-[7px] font-bold text-[var(--text-muted)] uppercase">Win Rate 75%</span>
+              <span className="text-[7px] font-bold text-[var(--text-muted)] uppercase">Review summary</span>
             </div>
             <div className="flex items-end gap-1 h-12 mb-2">
               <svg viewBox="0 0 100 40" className="w-full h-full overflow-visible">
@@ -138,10 +138,10 @@ export const FeaturesMegaMenu: React.FC<MegaMenuProps> = ({ onClose }) => {
         <div className="mt-4 relative h-36 w-full bg-gradient-to-br from-purple-500/5 to-indigo-500/5 rounded-xl border border-[var(--border-subtle)] overflow-hidden p-4 flex flex-col justify-center">
           <div className="flex flex-col gap-2">
             <div className="bg-indigo-600 text-white text-[9px] p-2 rounded-2xl rounded-bl-none max-w-[80%] self-start shadow-sm">
-              Analyze current market sentiment.
+              Summarize this trade review.
             </div>
             <div className="bg-[var(--card-bg)] text-[var(--text-main)] text-[9px] p-2 rounded-2xl rounded-br-none max-w-[80%] self-end border border-[var(--border-subtle)] shadow-sm">
-              Market is currently showing bullish divergence...
+              Main note: entry discipline needs review.
             </div>
           </div>
         </div>

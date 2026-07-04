@@ -10,9 +10,8 @@ The landing page is the first touchpoint for new users. It is responsible for:
 
 - Explaining TradeGrail's trading journal and analytics workflow
 - Presenting product features, dashboards, reports, and playbook previews
-- Supporting pricing, checkout, login, and signup routes
+- Supporting pricing, beta-safe checkout messaging, login, and signup entry routes
 - Connecting users to the main TradeGrail dashboard experience
-- Sharing the same Supabase project configuration used by the broader product
 
 ## Tech Stack
 
@@ -21,21 +20,16 @@ The landing page is the first touchpoint for new users. It is responsible for:
 - Vite
 - Tailwind CSS
 - React Router
-- Supabase
 - Vercel
 - Motion
 - Recharts and D3 for visual previews
-- Express development server
 
 ## Project Structure
 
 ```text
 src/components/      Marketing sections, navigation, mockups, and shared UI
-src/context/         Auth, language, and theme providers
-src/lib/             Supabase client and utility helpers
-src/pages/           Landing, pricing, auth, checkout, and dashboard routes
-src/services/        API helpers
-server.ts            Local Express server and development middleware
+src/context/         Language and theme providers
+src/pages/           Landing, pricing, auth redirect, and beta checkout messaging routes
 vite.config.ts       Vite, React, and Tailwind configuration
 vercel.json          Vercel routing configuration
 ```
@@ -48,12 +42,6 @@ Install dependencies:
 npm install
 ```
 
-Create a local environment file:
-
-```bash
-cp .env.example .env
-```
-
 Start the development server:
 
 ```bash
@@ -62,16 +50,7 @@ npm run dev
 
 ## Environment Variables
 
-Required variables are documented in `.env.example`.
-
-Common variables include:
-
-- `APP_URL`
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_ANON_KEY`
-- `GEMINI_API_KEY`
-
-Never commit real API keys or Supabase credentials.
+The landing page does not require production secrets. Authentication, payment, and user data live in the dashboard app.
 
 ## Deployment
 
@@ -85,7 +64,7 @@ vercel deploy
 vercel deploy --prod
 ```
 
-Before production deployment, verify that the Supabase environment variables point to the correct TradeGrail project.
+Before production deployment, verify that login/signup CTAs point to the dashboard app.
 
 ## Scripts
 

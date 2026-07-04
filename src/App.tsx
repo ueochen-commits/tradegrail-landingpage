@@ -1,9 +1,8 @@
 import React, { useEffect, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import { AnimatePresence } from 'motion/react';
 import { LanguageProvider } from './context/LanguageContext';
-import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 
 // 首页直接导入，不使用 lazy loading（用户一定会访问）
@@ -14,7 +13,6 @@ const PricingPage = React.lazy(() => import('./pages/PricingPage'));
 const LoginPage = React.lazy(() => import('./pages/LoginPage'));
 const SignupPage = React.lazy(() => import('./pages/SignupPage'));
 const CheckoutPage = React.lazy(() => import('./pages/CheckoutPage'));
-const DashboardPage = React.lazy(() => import('./pages/Dashboard'));
 
 // 加载中的占位组件
 function LoadingFallback() {
@@ -33,22 +31,21 @@ function ScrollToTop() {
   return null;
 }
 
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user, isLoading } = useAuth();
-  if (isLoading) return null;
-  if (!user) return <Navigate to="/login" />;
-  return <>{children}</>;
+function DashboardRedirect() {
+  useEffect(() => {
+    window.location.replace('https://dashboard.tradegrail.net');
+  }, []);
+  return <LoadingFallback />;
 }
 
 function AppContent() {
   const location = useLocation();
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
   const isCheckoutPage = location.pathname === '/checkout';
-  const isDashboardPage = location.pathname.startsWith('/dashboard');
 
   return (
     <>
-      {!isAuthPage && !isCheckoutPage && !isDashboardPage && <Navbar />}
+      {!isAuthPage && !isCheckoutPage && <Navbar />}
       <AnimatePresence mode="wait">
         <div key={location.pathname}>
           <Suspense fallback={<LoadingFallback />}>
@@ -58,14 +55,7 @@ function AppContent() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <DashboardPage />
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="/dashboard" element={<DashboardRedirect />} />
             </Routes>
           </Suspense>
         </div>
@@ -78,12 +68,10 @@ export default function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <AuthProvider>
-          <Router>
-            <ScrollToTop />
-            <AppContent />
-          </Router>
-        </AuthProvider>
+        <Router>
+          <ScrollToTop />
+          <AppContent />
+        </Router>
       </LanguageProvider>
     </ThemeProvider>
   );
