@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { TrendingUp, ArrowRight, CheckCircle2, BarChart3, Zap, Target, Shield, Globe, Cpu, MousePointer2, X, Sun, Moon } from 'lucide-react';
-import { TradeGrailLogo } from '../components/Logo';
+import { ArrowRight, CheckCircle2, Target, Shield, Cpu, X, Sun, Moon } from 'lucide-react';
 import React from 'react';
 import { cn } from '../lib/utils';
 import { FeatureShowcase } from '../components/FeatureShowcase';
@@ -26,7 +25,7 @@ const FadeInWhenVisible = ({ children, delay = 0 }: { children: React.ReactNode,
 
 export default function LandingPage() {
   const { scrollYProgress } = useScroll();
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const { theme } = useTheme();
   const [isMobileDark, setIsMobileDark] = React.useState(theme === 'dark');
   
@@ -127,16 +126,11 @@ export default function LandingPage() {
               </div>
 
               <div className="mt-12 flex items-center gap-6 relative z-10">
-                <div className="flex -space-x-4">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="relative group/avatar">
-                      <img 
-                        src={`https://picsum.photos/seed/avatar${i + 15}/100/100`} 
-                        alt={`Trader ${i}`}
-                        referrerPolicy="no-referrer"
-                        className="w-12 h-12 rounded-full border-2 border-[var(--bg-main)] object-cover ring-1 ring-[var(--border-subtle)] group-hover/avatar:scale-110 transition-transform" 
-                      />
-                    </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {[t('build.status.prototype'), t('build.status.beta'), t('build.status.audit'), t('build.status.public')].map((label) => (
+                    <span key={label} className="px-3 py-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/15 text-[10px] font-bold text-brand-primary uppercase tracking-widest">
+                      {label}
+                    </span>
                   ))}
                 </div>
                 <div className="flex flex-col">
@@ -189,7 +183,7 @@ export default function LandingPage() {
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-[60px] rounded-full" />
               <div className="w-12 h-12 rounded-2xl bg-[var(--bg-main)] border border-[var(--border-subtle)] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                <Globe className="w-6 h-6 text-blue-500/50" />
+                <CheckCircle2 className="w-6 h-6 text-blue-500/50" />
               </div>
               <div>
                 <h3 className="text-lg font-bold tracking-tight mb-2 text-[var(--text-main)]">{t('features.bento.global.title')}</h3>
@@ -200,19 +194,16 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Infinite Marquee (Simulated) */}
-      <section className="py-20 border-y border-[var(--border-subtle)] overflow-hidden">
-        <div className="flex gap-20 animate-marquee whitespace-nowrap">
-          {['Bloomberg', 'Reuters', 'Forbes', 'Wall Street Journal', 'Financial Times', 'CNBC'].map(i => (
-            <div key={i} className="flex items-center gap-4 text-[var(--text-muted)] opacity-30 font-bold text-2xl uppercase tracking-widest italic">
-              {i}
-            </div>
-          ))}
-          {['Bloomberg', 'Reuters', 'Forbes', 'Wall Street Journal', 'Financial Times', 'CNBC'].map(i => (
-            <div key={i + 'copy'} className="flex items-center gap-4 text-[var(--text-muted)] opacity-30 font-bold text-2xl uppercase tracking-widest italic">
-              {i}
-            </div>
-          ))}
+      {/* Build in Public Strip */}
+      <section id="build-public" className="py-20 border-y border-[var(--border-subtle)] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-brand-primary mb-4">{t('build.strip.tag')}</p>
+          <p className="text-2xl sm:text-4xl font-bold tracking-tight text-[var(--text-main)] max-w-4xl mx-auto leading-tight">
+            {t('build.strip.title')}
+          </p>
+          <p className="mt-5 text-[var(--text-muted)] text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
+            {t('build.strip.desc')}
+          </p>
         </div>
       </section>
 
@@ -297,31 +288,13 @@ export default function LandingPage() {
                   {t('mobile.desc')}
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <a href="#" className="px-6 py-3 rounded-2xl bg-white border border-black/10 flex items-center gap-4 hover:scale-[1.02] transition-all shadow-sm group">
-                    <svg viewBox="0 0 384 512" className="w-7 h-7 fill-black" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-                    </svg>
-                    <div className="text-left">
-                      <div className="text-[9px] text-black/60 uppercase font-black tracking-tighter leading-none mb-1">{t('mobile.app_store.label')}</div>
-                      <div className="text-lg font-bold text-black leading-none">App Store</div>
-                    </div>
+                  <a href="https://dashboard.tradegrail.net?auth=signup" className="px-6 py-3 rounded-2xl bg-brand-primary text-white flex items-center gap-3 hover:bg-brand-primary/90 transition-all font-bold">
+                    {t('mobile.web_cta')}
+                    <ArrowRight className="w-4 h-4" />
                   </a>
-                  <a href="#" className="px-6 py-3 rounded-2xl bg-white border border-black/10 flex items-center gap-4 hover:scale-[1.02] transition-all shadow-sm group">
-                    <svg viewBox="0 0 512 512" className="w-7 h-7" xmlns="http://www.w3.org/2000/svg">
-                      <path fill="#4285F4" d="M12 55.4v401.2c0 13.1 7.1 25.1 18.6 31.4l212.1-212.1L12 55.4z"/>
-                      <path fill="#34A853" d="M481.4 223.4L337.3 139.9 242.7 234.5l94.6 94.6 144.1-83.5c11.5-6.3 18.6-18.3 18.6-31.4s-7.1-25.1-18.6-30.8z"/>
-                      <path fill="#FBBC05" d="M12 55.4l230.7 230.7 94.6-94.6L12 24c-11.5 6.3-18.6 18.3-18.6 31.4z"/>
-                      <path fill="#EA4335" d="M242.7 277.5l94.6 94.6 144.1-83.5c11.5-6.3 18.6-18.3 18.6-31.4s-7.1-25.1-18.6-30.8L242.7 277.5z" opacity=".1"/>
-                      <path fill="#EA4335" d="M337.3 372.1l144.1-83.5c11.5-6.3 18.6-18.3 18.6-31.4 0-1.2-.1-2.4-.2-3.6l-162.5 162.5 0 0z" opacity=".1"/>
-                      <path fill="#EA4335" d="M30.6 488c-11.5-6.3-18.6-18.3-18.6-31.4V55.4c0-1.2.1-2.4.2-3.6L242.7 282.5 30.6 488z" opacity=".1"/>
-                      <path fill="#EA4335" d="M337.3 139.9L30.6 24C19.1 17.7 12 29.7 12 42.8V55.4L242.7 286.1 337.3 139.9z"/>
-                      <path fill="#EA4335" d="M337.3 372.1L242.7 277.5 30.6 488c11.5 6.3 18.6-5.7 18.6-18.8v-12.6L337.3 372.1z"/>
-                    </svg>
-                    <div className="text-left">
-                      <div className="text-[9px] text-black/60 uppercase font-black tracking-tighter leading-none mb-1">{t('mobile.google_play.label')}</div>
-                      <div className="text-lg font-bold text-black leading-none">Google Play</div>
-                    </div>
-                  </a>
+                  <span className="px-6 py-3 rounded-2xl bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-muted)] text-sm flex items-center">
+                    {t('mobile.app_status')}
+                  </span>
                 </div>
               </FadeInWhenVisible>
             </div>

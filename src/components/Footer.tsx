@@ -3,17 +3,15 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
-  Twitter, 
-  Instagram, 
-  Youtube, 
-  Apple, 
-  PlayCircle 
+  Twitter,
+  Instagram,
+  Youtube
 } from 'lucide-react';
 import { TradeGrailLogo } from './Logo';
 import { useLanguage } from '../context/LanguageContext';
 
 export const Footer = () => {
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <footer className="relative bg-[var(--bg-main)] text-[var(--text-main)] pt-20 pb-10 overflow-hidden transition-colors duration-300">
@@ -110,12 +108,10 @@ export const Footer = () => {
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] mb-6">{t('footer.product')}</h4>
             <ul className="space-y-4">
               {[
-                { key: 'footer.product.analytics', label: t('footer.product.analytics'), to: '#' },
-                { key: 'footer.product.replay', label: t('footer.product.replay'), to: '#' },
-                { key: 'footer.product.assistant', label: t('footer.product.assistant'), to: '#' },
-                { key: 'footer.product.brokers', label: t('footer.product.brokers'), to: '#' },
+                { key: 'footer.product.analytics', label: t('footer.product.analytics'), to: '/#features' },
+                { key: 'footer.product.assistant', label: t('footer.product.assistant'), to: '/#features' },
                 { key: 'footer.product.pricing', label: t('footer.product.pricing'), to: '/pricing' },
-                { key: 'footer.product.whatsnew', label: t('footer.product.whatsnew'), to: '#' }
+                { key: 'footer.product.whatsnew', label: t('footer.product.whatsnew'), to: '/#build-public' }
               ].map(link => (
                 <li key={link.key}>
                   {link.to.startsWith('/') ? (
@@ -132,12 +128,10 @@ export const Footer = () => {
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] mb-6">{t('footer.company')}</h4>
             <ul className="space-y-4">
               {[
-                { key: 'footer.company.about', label: t('footer.company.about') },
-                { key: 'footer.company.reviews', label: t('footer.company.reviews') },
-                { key: 'footer.company.blog', label: t('footer.company.blog') },
-                { key: 'footer.company.affiliate', label: t('footer.company.affiliate') }
+                { key: 'footer.company.about', label: t('footer.company.about'), href: '/#build-public' },
+                { key: 'footer.company.blog', label: t('footer.company.blog'), href: '/#build-public' }
               ].map(link => (
-                <li key={link.key}><a href="#" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">{link.label}</a></li>
+                <li key={link.key}><a href={link.href} className="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">{link.label}</a></li>
               ))}
             </ul>
           </div>
@@ -146,13 +140,10 @@ export const Footer = () => {
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] mb-6">{t('footer.support')}</h4>
             <ul className="space-y-4">
               {[
-                { key: 'footer.support.help', label: t('footer.support.help') },
-                { key: 'footer.support.contact', label: t('footer.support.contact') },
-                { key: 'footer.support.tutorials', label: t('footer.support.tutorials') },
-                { key: 'footer.support.howto', label: t('footer.support.howto') },
-                { key: 'footer.support.glossary', label: t('footer.support.glossary') }
+                { key: 'footer.support.help', label: t('footer.support.help'), href: '/#build-public' },
+                { key: 'footer.support.contact', label: t('footer.support.contact'), href: 'https://dashboard.tradegrail.net?auth=signup' }
               ].map(link => (
-                <li key={link.key}><a href="#" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">{link.label}</a></li>
+                <li key={link.key}><a href={link.href} className="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">{link.label}</a></li>
               ))}
             </ul>
           </div>
@@ -161,12 +152,10 @@ export const Footer = () => {
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] mb-6">{t('footer.legal')}</h4>
             <ul className="space-y-4">
               {[
-                { key: 'footer.legal.terms', label: t('footer.legal.terms') },
-                { key: 'footer.legal.billing', label: t('footer.legal.billing') },
                 { key: 'footer.legal.risk', label: t('footer.legal.risk') },
                 { key: 'footer.legal.privacy', label: t('footer.legal.privacy') }
               ].map(link => (
-                <li key={link.key}><a href="#" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">{link.label}</a></li>
+                <li key={link.key}><span className="text-sm text-[var(--text-muted)]">{link.label}</span></li>
               ))}
             </ul>
           </div>
@@ -177,27 +166,13 @@ export const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             {/* Social Icons */}
             <div className="flex gap-6">
-              <a href="#" className="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors"><Twitter className="w-5 h-5" /></a>
-              <a href="#" className="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors"><Instagram className="w-5 h-5" /></a>
-              <a href="#" className="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors"><Youtube className="w-5 h-5" /></a>
+              <span className="text-[var(--text-muted)]"><Twitter className="w-5 h-5" /></span>
+              <span className="text-[var(--text-muted)]"><Instagram className="w-5 h-5" /></span>
+              <span className="text-[var(--text-muted)]"><Youtube className="w-5 h-5" /></span>
             </div>
 
-            {/* App Store Buttons */}
-            <div className="flex gap-4">
-              <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--card-bg)] border border-[var(--border-subtle)] hover:bg-[var(--bg-main)] transition-colors group">
-                <Apple className="w-5 h-5" />
-                <div className="text-left">
-                  <div className="text-[8px] uppercase leading-none text-[var(--text-muted)]">{language === 'zh' ? 'App Store 下载' : 'Download on the'}</div>
-                  <div className="text-sm font-bold leading-none">App Store</div>
-                </div>
-              </a>
-              <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--card-bg)] border border-[var(--border-subtle)] hover:bg-[var(--bg-main)] transition-colors group">
-                <PlayCircle className="w-5 h-5" />
-                <div className="text-left">
-                  <div className="text-[8px] uppercase leading-none text-[var(--text-muted)]">{language === 'zh' ? 'Google Play 获取' : 'Get it on'}</div>
-                  <div className="text-sm font-bold leading-none">Google Play</div>
-                </div>
-              </a>
+            <div className="text-sm text-[var(--text-muted)]">
+              {t('footer.beta_note')}
             </div>
           </div>
 

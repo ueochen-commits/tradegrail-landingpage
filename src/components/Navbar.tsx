@@ -1,61 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, LogOut, LayoutGrid, ChevronDown, ArrowRight, BookOpen, HelpCircle, PlayCircle, Bitcoin, BarChart2, Users } from 'lucide-react';
+import { Menu, X, LogOut, LayoutGrid, ChevronDown, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
-import { TradeGrailLogo } from './Logo';
 import { FeaturesMegaMenu } from './FeaturesMegaMenu';
-
-// 通用简单下拉菜单
-interface SimpleDropdownItem {
-  icon: React.ReactNode;
-  label: string;
-  desc: string;
-  href?: string;
-  comingSoon?: boolean;
-}
-
-function SimpleDropdown({ items, onClose }: { items: SimpleDropdownItem[]; onClose: () => void }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 8 }}
-      transition={{ duration: 0.15 }}
-      className="absolute top-full left-0 mt-1 w-72 bg-[var(--card-bg)] rounded-xl shadow-[0_8px_40px_-8px_rgba(0,0,0,0.18)] border border-[var(--border-subtle)] overflow-hidden z-50 py-2"
-      onMouseLeave={onClose}
-    >
-      {items.map((item, i) => (
-        <a
-          key={i}
-          href={item.href || '#'}
-          className="flex items-start gap-3 px-4 py-3 hover:bg-[var(--border-subtle)] transition-colors group"
-          onClick={onClose}
-        >
-          <div className="w-8 h-8 rounded-lg bg-[var(--bg-main)] border border-[var(--border-subtle)] flex items-center justify-center shrink-0 mt-0.5">
-            {item.icon}
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="text-[14px] font-semibold text-[var(--text-main)] group-hover:text-[#3D3A8C] transition-colors">{item.label}</span>
-              {item.comingSoon && (
-                <span className="px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-500 text-[9px] font-bold uppercase tracking-wide">即将推出</span>
-              )}
-            </div>
-            <p className="text-[12px] text-[var(--text-muted)] mt-0.5 leading-snug">{item.desc}</p>
-          </div>
-        </a>
-      ))}
-    </motion.div>
-  );
-}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showMegaMenu, setShowMegaMenu] = useState(false);
-  const [showSolutions, setShowSolutions] = useState(false);
-  const [showResources, setShowResources] = useState(false);
   const { t } = useLanguage();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -65,49 +18,6 @@ export default function Navbar() {
 
   // 导航链接统一样式：深色、15px、medium
   const navLinkCls = "flex items-center gap-1 px-3 py-2 text-[16px] font-semibold text-[var(--text-main)] hover:text-[#3D3A8C] transition-colors rounded-md hover:bg-[var(--border-subtle)] whitespace-nowrap";
-
-  const solutionItems: SimpleDropdownItem[] = [
-    {
-      icon: <Bitcoin className="w-4 h-4 text-amber-500" />,
-      label: t('nav.solutions.crypto'),
-      desc: t('nav.solutions.crypto.desc'),
-      href: '#',
-    },
-    {
-      icon: <BarChart2 className="w-4 h-4 text-indigo-500" />,
-      label: t('nav.solutions.stocks'),
-      desc: t('nav.solutions.stocks.desc'),
-      href: '#',
-    },
-    {
-      icon: <Users className="w-4 h-4 text-emerald-500" />,
-      label: t('nav.solutions.prop'),
-      desc: t('nav.solutions.prop.desc'),
-      href: '#',
-      comingSoon: true,
-    },
-  ];
-
-  const resourceItems: SimpleDropdownItem[] = [
-    {
-      icon: <BookOpen className="w-4 h-4 text-indigo-500" />,
-      label: t('nav.resources.academy'),
-      desc: t('nav.resources.academy.desc'),
-      href: '#',
-    },
-    {
-      icon: <PlayCircle className="w-4 h-4 text-pink-500" />,
-      label: t('nav.resources.tutorials'),
-      desc: t('nav.resources.tutorials.desc'),
-      href: '#',
-    },
-    {
-      icon: <HelpCircle className="w-4 h-4 text-slate-400" />,
-      label: t('nav.resources.faq'),
-      desc: t('nav.resources.faq.desc'),
-      href: '#',
-    },
-  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-main)] border-b border-[var(--border-subtle)]">
@@ -139,44 +49,14 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            {/* 解决方案 — simple dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setShowSolutions(true)}
-              onMouseLeave={() => setShowSolutions(false)}
-            >
-              <button className={navLinkCls}>
-                {t('nav.solutions')}
-                <motion.span animate={{ rotate: showSolutions ? 180 : 0 }} transition={{ duration: 0.18 }} className="inline-flex">
-                  <ChevronDown className="w-3.5 h-3.5 opacity-60" />
-                </motion.span>
-              </button>
-              <AnimatePresence>
-                {showSolutions && <SimpleDropdown items={solutionItems} onClose={() => setShowSolutions(false)} />}
-              </AnimatePresence>
-            </div>
-
             {/* 价格 */}
             <Link to="/pricing" className={navLinkCls}>
               {t('nav.pricing')}
             </Link>
 
-            {/* 资源 — simple dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setShowResources(true)}
-              onMouseLeave={() => setShowResources(false)}
-            >
-              <button className={navLinkCls}>
-                {t('nav.resources')}
-                <motion.span animate={{ rotate: showResources ? 180 : 0 }} transition={{ duration: 0.18 }} className="inline-flex">
-                  <ChevronDown className="w-3.5 h-3.5 opacity-60" />
-                </motion.span>
-              </button>
-              <AnimatePresence>
-                {showResources && <SimpleDropdown items={resourceItems} onClose={() => setShowResources(false)} />}
-              </AnimatePresence>
-            </div>
+            <a href="/#build-public" className={navLinkCls}>
+              {t('nav.build_public')}
+            </a>
 
             {user && (
               <a href="https://dashboard.tradegrail.net" className={navLinkCls}>
@@ -185,10 +65,6 @@ export default function Navbar() {
               </a>
             )}
 
-            {/* 帮助与支持 */}
-            <a href="#" className={navLinkCls}>
-              {'帮助与支持'}
-            </a>
           </div>
 
           {/* Right side */}
@@ -242,17 +118,11 @@ export default function Navbar() {
             <a href="/#features" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
               {t('nav.products')}
             </a>
-            <a href="#" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
-              {t('nav.solutions')}
-            </a>
             <Link to="/pricing" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
               {t('nav.pricing')}
             </Link>
-            <a href="#" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
-              {t('nav.resources')}
-            </a>
-            <a href="#" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
-              {'帮助与支持'}
+            <a href="/#build-public" className="block px-3 py-2.5 text-[15px] font-medium text-[var(--text-main)] rounded-md hover:bg-[var(--border-subtle)]" onClick={() => setIsOpen(false)}>
+              {t('nav.build_public')}
             </a>
             {user ? (
               <>
