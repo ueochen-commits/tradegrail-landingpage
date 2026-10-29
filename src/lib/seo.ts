@@ -16,6 +16,7 @@ export const basePaths = [
   "/terms",
   "/privacy",
   "/refunds",
+  "/acceptable-use",
   ...guides.zh.map((g) => `/guides/${g.slug}`),
 ];
 export const publicPaths = basePaths.flatMap((p) => [
@@ -37,6 +38,7 @@ export function pageInfo(pathname: string) {
           "Futures Trading Journal for GC, NQ & ES | TradeGrail",
         "/about": "About TradeGrail | Trading Journal & Review Software",
         "/terms": "Terms of Service | TradeGrail",
+        "/acceptable-use": "Acceptable Use Policy | TradeGrail",
         "/privacy": "Privacy Policy | TradeGrail",
         "/refunds": "Refund & Cancellation Policy | TradeGrail",
       }
@@ -48,6 +50,7 @@ export function pageInfo(pathname: string) {
           "期货交易日志：GC、NQ、ES 截图与费用复盘｜TradeGrail",
         "/about": "关于 TradeGrail｜交易记录与复盘软件",
         "/terms": "服务条款｜TradeGrail",
+        "/acceptable-use": "可接受使用政策｜TradeGrail",
         "/privacy": "隐私政策｜TradeGrail",
         "/refunds": "退款与取消政策｜TradeGrail",
       };
@@ -62,6 +65,7 @@ export function pageInfo(pathname: string) {
           "Keep GC, NQ and ES trade records, screenshots, fees and review notes together. Learn standard-contract calculations and the limits of embedded chart data.",
         "/about":
           "Learn what TradeGrail does, who it is for, which review workflows are available, and which capabilities are outside its current beta scope.",
+        "/acceptable-use": "Permitted AI review uses and prohibited NSFW, harmful or abusive inputs and generated output in TradeGrail.",
         "/terms": "Read TradeGrail's software service, subscription, renewal and cancellation terms.",
         "/privacy": "How TradeGrail handles account data, journal content, AI requests, payments and privacy requests.",
         "/refunds": "How to request a refund, cancel renewals and get help with a TradeGrail payment.",
@@ -76,6 +80,7 @@ export function pageInfo(pathname: string) {
           "集中记录 GC、NQ、ES 期货交易的价格、截图、手续费与净盈亏，复盘执行过程。支持手动记录与费用模板，清楚说明合约计算和行情授权边界。",
         "/about":
           "了解 TradeGrail 的交易日志、截图、执行复盘和账户工作流，以及当前 Beta 阶段的产品范围与限制。",
+        "/acceptable-use": "了解 TradeGrail AI 复盘的允许用途，以及对 NSFW、色情、有害输入与生成结果的禁止规则。",
         "/terms": "了解 TradeGrail 软件服务、订阅、续费与取消条款。",
         "/privacy": "了解 TradeGrail 如何处理账户、交易日志、AI 请求、付款及隐私申请。",
         "/refunds": "了解如何申请退款、取消续费并处理 TradeGrail 付款问题。",

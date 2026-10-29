@@ -96,7 +96,7 @@ export function SiteContent() {
               path={localePath("/about", lang)}
               element={<ProductFactsPage />}
             />,
-            ...['terms','privacy','refunds'].map(key=><Route key={`${lang}-${key}`} path={localePath('/'+key,lang)} element={<LegalPage/>}/>),
+            ...['terms','acceptable-use','privacy','refunds'].map(key=><Route key={`${lang}-${key}`} path={localePath('/'+key,lang)} element={<LegalPage/>}/>),
           ])}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />

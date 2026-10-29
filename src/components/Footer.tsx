@@ -155,6 +155,7 @@ export const Footer = () => {
             <ul className="space-y-4">
               {[
                 { key: 'footer.legal.terms', label: language === 'en' ? 'Terms of Service' : '服务条款', href: localized('/terms') },
+                { key: 'footer.legal.aup', label: language === 'en' ? 'Acceptable Use Policy' : '可接受使用政策', href: localized('/acceptable-use') },
                 { key: 'footer.legal.privacy', label: t('footer.legal.privacy'), href: localized('/privacy') },
                 { key: 'footer.legal.refunds', label: language === 'en' ? 'Refunds & cancellation' : '退款与取消', href: localized('/refunds') }
               ].map(link => (

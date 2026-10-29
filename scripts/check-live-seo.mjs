@@ -2,7 +2,7 @@ const origin = (process.argv[2] || "https://www.tradegrail.net").replace(
   /\/$/,
   "",
 );
-const expectedPages = Number(process.env.EXPECTED_PUBLIC_PAGES || '22');
+const expectedPages = Number(process.env.EXPECTED_PUBLIC_PAGES || '24');
 const canonicalOrigin = "https://www.tradegrail.net";
 const results = [];
 async function request(path) {

@@ -14,8 +14,8 @@ const pages = new Map(
   ),
 );
 
-test("all 22 public pages contain meaningful initial HTML, unique titles and matching canonicals", () => {
-  assert.equal(urls.length, 22);
+test("all 24 public pages contain meaningful initial HTML, unique titles and matching canonicals", () => {
+  assert.equal(urls.length, 24);
   const titles = new Set();
   for (const [p, html] of pages) {
     const title = html.match(/<title>(.*?)<\/title>/)?.[1];
@@ -121,7 +121,7 @@ test("high-intent guides include actionable scope, sourced examples, related lin
 
 
 test('public legal and pricing HTML does not disclose private operator identity or mix payment currencies',async()=>{
-  for(const path of ['terms','privacy','refunds','en/terms','en/privacy','en/refunds','pricing','en/pricing']) {
+  for(const path of ['terms','acceptable-use','en/acceptable-use','privacy','refunds','en/terms','en/privacy','en/refunds','pricing','en/pricing']) {
     const html=await readFile(new URL('../dist/'+path+'.html',import.meta.url),'utf8');
     assert.doesNotMatch(html,/陈峙樳|Chen Zhixun|东华南路|湖景华厦|510080/);
     if(path.endsWith('pricing'))assert.doesNotMatch(html,/(?:US\$|¥)\d/);
@@ -134,5 +134,16 @@ test('homepage and pricing share accurate plan limits without old beta or course
   assert.match(html,p.startsWith('/en')?/Up to 3 personal accounts/:/最多 3 个真实交易账户/);
   assert.doesNotMatch(html,/Unlimited accounts|无限账户|TradeGrail Academy|系统化交易课程/);
   assert.match(html,/API (?:linking|连接)/);
+ }
+});
+
+test('both AUP pages are public, linked site-wide, and prohibit NSFW in AI inputs and outputs with matching terms',()=>{
+ for(const prefix of ['', '/en']){
+  const aup=pages.get(prefix+'/acceptable-use');assert.ok(aup);
+  assert.match(aup,/NSFW/);assert.match(aup,prefix?/AI inputs and outputs/:/AI 输入与输出/);
+  assert.match(aup,prefix?/sexually explicit/:/露骨性内容/);assert.match(aup,prefix?/sexually suggestive/:/性暗示内容/);
+  assert.match(aup,/support@tradegrail.net/);
+  const terms=pages.get(prefix+'/terms');assert.match(terms,/NSFW/);assert.ok(terms.includes(`href="${prefix}/acceptable-use"`));
+  for(const path of ['','/pricing','/privacy','/refunds'])assert.ok(pages.get(prefix+(path|| (prefix?'':'/'))).includes(`href="${prefix}/acceptable-use"`));
  }
 });
