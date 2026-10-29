@@ -1,3 +1,4 @@
+import PricingPlans from '../components/PricingPlans';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight, CheckCircle2, Target, Shield, Cpu, X, Sun, Moon } from 'lucide-react';
 import React from 'react';
@@ -10,9 +11,9 @@ import { ShowcaseSection } from '../components/ShowcaseSection';
 import { useLanguage } from '../context/LanguageContext';
 import { GuidesPreview } from './GuidesPage';
 import { localePath } from '../content/guides';
-import { useTheme } from '../context/ThemeContext';
 
-import { MobileDashboardMockup } from '../components/MobileDashboardMockup';
+
+
 
 const FadeInWhenVisible = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
   <motion.div
@@ -28,14 +29,6 @@ const FadeInWhenVisible = ({ children, delay = 0 }: { children: React.ReactNode,
 export default function LandingPage() {
   const { scrollYProgress } = useScroll();
   const { t, language } = useLanguage();
-  const { theme } = useTheme();
-  const [isMobileDark, setIsMobileDark] = React.useState(theme === 'dark');
-  
-  // Sync with global theme changes initially
-  React.useEffect(() => {
-    setIsMobileDark(theme === 'dark');
-  }, [theme]);
-
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
   return (
@@ -211,97 +204,8 @@ export default function LandingPage() {
 
 
 
-      {/* Mobile App Section */}
-      <section className="py-32 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="order-2 lg:order-1 relative">
-              <div className="absolute inset-0 bg-brand-primary/20 blur-[120px] rounded-full -z-10" />
-              
-              {/* Theme Toggle for Mockup */}
-              <div className={cn(
-                "absolute -top-12 left-1/2 -translate-x-1/2 flex items-center gap-3 backdrop-blur-md border px-4 py-2 rounded-full shadow-sm z-50 transition-all duration-500",
-                isMobileDark 
-                  ? "bg-slate-900/80 border-slate-800" 
-                  : "bg-white/80 border-[#E2E8F0]"
-              )}>
-                <button 
-                  onClick={() => setIsMobileDark(false)}
-                  className={cn(
-                    "p-1.5 rounded-full transition-all",
-                    !isMobileDark ? "bg-brand-primary text-white shadow-md" : "text-[#64748B] hover:bg-[#F1F5F9]"
-                  )}
-                >
-                  <Sun className="w-4 h-4" />
-                </button>
-                <button 
-                  onClick={() => setIsMobileDark(true)}
-                  className={cn(
-                    "p-1.5 rounded-full transition-all",
-                    isMobileDark ? "bg-brand-primary text-white shadow-md" : "text-[#64748B] hover:bg-slate-800"
-                  )}
-                >
-                  <Moon className="w-4 h-4" />
-                </button>
-                <span className={cn("text-xs font-bold ml-1", isMobileDark ? "text-slate-400" : "text-[#64748B]")}>
-                  {isMobileDark ? t('nav.theme.dark') : t('nav.theme.light')}
-                </span>
-              </div>
-
-              <motion.div 
-                initial={{ y: 100, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                className={cn(
-                  "relative mx-auto w-[300px] h-[620px] rounded-[3.5rem] p-[6px] shadow-[0_0_50px_-12px_rgba(0,0,0,0.8)] ring-1 transition-all duration-500",
-                  isMobileDark ? "bg-[#0a0a0a] ring-white/20" : "bg-[#1a1a1a] ring-black/5"
-                )}
-              >
-                {/* Outer Frame Polish */}
-                <div className="absolute inset-0 rounded-[3.5rem] border border-white/5 pointer-events-none" />
-                
-                {/* Dynamic Island */}
-                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-24 h-7 bg-black rounded-full z-[70] flex items-center justify-center shadow-inner">
-                  <div className="absolute right-4 w-1.5 h-1.5 rounded-full bg-[#0a0a0a] border border-white/5" />
-                </div>
-                
-                {/* Screen */}
-                <div className="h-full w-full bg-white rounded-[3.1rem] overflow-hidden relative shadow-inner">
-                  <MobileDashboardMockup isDark={isMobileDark} />
-                </div>
-
-                {/* Side Buttons - iPhone 16 Style */}
-                {/* Action Button */}
-                <div className="absolute -left-[2px] top-28 w-[3px] h-8 bg-[#2a2a2a] rounded-r-sm shadow-sm" />
-                {/* Volume Buttons */}
-                <div className="absolute -left-[2px] top-44 w-[3px] h-14 bg-[#2a2a2a] rounded-r-sm shadow-sm" />
-                <div className="absolute -left-[2px] top-64 w-[3px] h-14 bg-[#2a2a2a] rounded-r-sm shadow-sm" />
-                {/* Power Button */}
-                <div className="absolute -right-[2px] top-48 w-[3px] h-20 bg-[#2a2a2a] rounded-l-sm shadow-sm" />
-                {/* Camera Control */}
-                <div className="absolute -right-[2px] top-80 w-[3px] h-14 bg-[#2a2a2a] rounded-l-sm shadow-sm opacity-80" />
-              </motion.div>
-            </div>
-            <div className="order-1 lg:order-2">
-              <FadeInWhenVisible>
-                <span className="text-brand-primary font-bold text-sm uppercase tracking-widest mb-4 block">{t('mobile.tag')}</span>
-                <h2 className="text-5xl font-bold mb-8 leading-tight">{t('mobile.title')} <br /><span className="text-brand-primary">{t('mobile.title.accent')}</span></h2>
-                <p className="text-[var(--text-muted)] text-xl mb-12 leading-relaxed">
-                  {t('mobile.desc')}
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <a href="https://dashboard.tradegrail.net?auth=signup" className="px-6 py-3 rounded-2xl bg-brand-primary text-white flex items-center gap-3 hover:bg-brand-primary/90 transition-all font-bold">
-                    {t('mobile.web_cta')}
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                  <span className="px-6 py-3 rounded-2xl bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-muted)] text-sm flex items-center">
-                    {t('mobile.app_status')}
-                  </span>
-                </div>
-              </FadeInWhenVisible>
-            </div>
-          </div>
-        </div>
+      <section className="py-20 bg-[var(--card-bg)]/30">
+        <div className="max-w-5xl mx-auto px-6"><span className="text-brand-primary font-bold">{t('mobile.tag')}</span><h2 className="text-4xl font-bold my-5">{t('mobile.title')} {t('mobile.title.accent')}</h2><p className="text-[var(--text-muted)] text-lg mb-7">{t('mobile.desc')}</p><a href="https://dashboard.tradegrail.net?auth=signup" className="inline-flex px-6 py-3 rounded-xl bg-brand-primary text-white font-bold">{t('mobile.web_cta')}</a><p className="mt-4 text-sm text-[var(--text-muted)]">{t('mobile.app_status')}</p></div>
       </section>
 
       {/* Comparison Section */}
@@ -341,80 +245,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-32 bg-[var(--card-bg)]/30" id="pricing">
+      <section className="py-24 bg-[var(--card-bg)]/30" id="pricing">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">{t('pricing.title')}</h2>
-            <p className="text-[var(--text-muted)] text-lg">{t('pricing.desc')}</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { 
-                name: t('pricing.plan.starter.name'), 
-                price: t('pricing.currency') + t('pricing.starter.price'), 
-                desc: t('pricing.plan.starter.desc'),
-                features: [t('pricing.starter.f1'), t('pricing.starter.f2'), t('pricing.starter.f3'), t('pricing.starter.f4')],
-                cta: t('pricing.starter.cta'),
-                popular: false
-              },
-              { 
-                name: t('pricing.plan.pro.name'), 
-                price: t('pricing.currency') + t('pricing.pro.price'), 
-                desc: t('pricing.plan.pro.desc'),
-                features: [t('pricing.pro.f1'), t('pricing.pro.f2'), t('pricing.pro.f3'), t('pricing.pro.f4'), t('pricing.pro.f5')],
-                cta: t('pricing.pro.cta'),
-                popular: true
-              },
-              { 
-                name: t('pricing.plan.elite.name'), 
-                price: t('pricing.currency') + t('pricing.elite.price'), 
-                desc: t('pricing.plan.elite.desc'),
-                features: [t('pricing.elite.f1'), t('pricing.elite.f2'), t('pricing.elite.f3'), t('pricing.elite.f4'), t('pricing.elite.f5')],
-                cta: t('pricing.elite.cta'),
-                popular: false
-              }
-            ].map((plan, i) => (
-              <motion.div 
-                key={i}
-                whileHover={{ y: -10 }}
-                className={cn(
-                  "p-10 rounded-[2.5rem] border flex flex-col",
-                  plan.popular ? "bg-brand-primary/10 border-brand-primary/50 relative" : "bg-[var(--card-bg)] border-[var(--border-subtle)]"
-                )}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-primary text-white text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-full">
-                    {t('pricing.popular')}
-                  </div>
-                )}
-                <div className="mb-8">
-                  <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold">{plan.price}</span>
-                  </div>
-                  <p className="text-sm text-[var(--text-muted)] mt-4">{plan.desc}</p>
-                </div>
-                <ul className="space-y-4 mb-10 flex-1">
-                  {plan.features.map((f, j) => (
-                    <li key={j} className="flex items-center gap-3 text-sm text-[var(--text-muted)]">
-                      <CheckCircle2 className="w-4 h-4 text-brand-primary" /> {f}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="https://dashboard.tradegrail.net?auth=signup"
-                  className={cn(
-                    "w-full py-4 rounded-2xl font-bold transition-all text-center",
-                    plan.popular ? "bg-brand-primary text-white hover:bg-brand-primary/90" : "bg-[var(--border-subtle)] text-[var(--text-main)] hover:bg-[var(--border-subtle)]"
-                  )}
-                >
-                  {plan.cta}
-                </a>
-              </motion.div>
-            ))}
-          </div>
+          <div className="text-center mb-12"><h2 className="text-4xl font-bold mb-6">{t('pricing.title')}</h2><p className="text-[var(--text-muted)]">{language === 'en' ? 'Start free. Choose a plan when you need it.' : '先免费体验，再按需要选择方案。'}</p></div>
+          <PricingPlans/>
         </div>
       </section>
 

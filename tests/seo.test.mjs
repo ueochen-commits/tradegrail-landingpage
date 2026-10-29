@@ -127,3 +127,12 @@ test('public legal and pricing HTML does not disclose private operator identity 
     if(path.endsWith('pricing'))assert.doesNotMatch(html,/(?:US\$|¥)\d/);
   }
 });
+
+test('homepage and pricing share accurate plan limits without old beta or course offers',()=>{
+ for(const p of ['/','/en','/pricing','/en/pricing']){
+  const html=pages.get(p);assert.ok(html, p);
+  assert.match(html,p.startsWith('/en')?/Up to 3 personal accounts/:/最多 3 个真实交易账户/);
+  assert.doesNotMatch(html,/Unlimited accounts|无限账户|TradeGrail Academy|系统化交易课程/);
+  assert.match(html,/API (?:linking|连接)/);
+ }
+});

@@ -45,7 +45,7 @@ export default function ProductFactsPage() {
           ],
           [
             "What is outside the promise?",
-            "No order execution, trading signals, guaranteed returns or universal broker synchronization. Licensed market data, contract coverage and integrations have specific limits. Paid availability is explained separately on the pricing page.",
+            "No order execution, trading signals or guaranteed returns. API linking and automatic broker sync are currently paused; manual records and CSV import remain available. Licensed market data, contract coverage and integrations have specific limits. Paid availability is explained separately on the pricing page.",
           ],
           [
             "How we maintain these guides",
@@ -60,7 +60,7 @@ export default function ProductFactsPage() {
           ],
           [
             "券商不在列表，也可以手动开始",
-            "无需先绑定券商凭据即可创建自己的手动交易账户。先录入一笔记录，或准备好字段和毛/净盈亏口径明确的 CSV 文件。自动同步不代表覆盖全部券商。",
+            "无需先绑定券商凭据即可创建自己的手动交易账户。先录入一笔记录，或准备好字段和毛/净盈亏口径明确的 CSV 文件。API 连接与自动同步暂未开放，请使用手动录入或 CSV 导入。",
           ],
           [
             "核对标准 GC、NQ、ES 的盈亏与费用",
@@ -90,7 +90,7 @@ export default function ProductFactsPage() {
           ],
           [
             "哪些事情不在产品承诺中？",
-            "TradeGrail 不代客下单、不提供买卖信号、不承诺收益，也不承诺自动同步所有券商。行情授权、合约计算和集成有各自边界；付费开放情况在方案页单独说明。",
+            "TradeGrail 不代客下单、不提供买卖信号、不承诺收益，API 连接与自动同步暂未开放。行情授权、合约计算和集成有各自边界；付费开放情况在方案页单独说明。",
           ],
           [
             "这些指南如何维护？",
