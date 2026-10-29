@@ -2,9 +2,7 @@ const origin = (process.argv[2] || "https://www.tradegrail.net").replace(
   /\/$/,
   "",
 );
-// Keep the published 16-page baseline while billing pages remain owner-paused.
-// A local 22-page rehearsal can set EXPECTED_PUBLIC_PAGES=22. Change the published baseline with release.
-const expectedPages = Number(process.env.EXPECTED_PUBLIC_PAGES || '16');
+const expectedPages = Number(process.env.EXPECTED_PUBLIC_PAGES || '22');
 const canonicalOrigin = "https://www.tradegrail.net";
 const results = [];
 async function request(path) {
