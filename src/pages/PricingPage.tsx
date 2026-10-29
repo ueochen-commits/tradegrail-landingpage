@@ -1,176 +1,26 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { Check, HelpCircle, Sparkles } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Check } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import { cn } from '../lib/utils';
 import { Footer } from '../components/Footer';
+import { localePath } from '../content/guides';
 
-const PricingPage = () => {
-  const { t } = useLanguage();
+export default function PricingPage() {
+  const { language }=useLanguage(); const en=language==='en';
+  const [yearly,setYearly]=useState(false);
+  const [market,setMarket]=useState<{currency:'CNY'|'USD';prices:Record<'pro'|'elite',Record<'monthly'|'yearly',number>>}|null>(null);
+  const [failed,setFailed]=useState(false);
+  const [retry,setRetry]=useState(0);
+  useEffect(()=>{let alive=true;setFailed(false);setMarket(null);fetch('/api/billing-market',{cache:'no-store'}).then(async response=>{if(!response.ok)throw Error('market');const value=await response.json();if(!['CNY','USD'].includes(value.currency)||!value.prices?.pro?.monthly||!value.prices?.elite?.yearly)throw Error('market');if(alive)setMarket(value);}).catch(()=>{if(alive)setFailed(true);});return()=>{alive=false;};},[retry]);
+  const sign=market?.currency==='CNY'?'¥':'US$';
 
-  const plans = [
-    {
-      id: 'starter',
-      name: t('pricing.plan.starter.name'),
-      desc: t('pricing.plan.starter.desc'),
-      price: t('pricing.starter.price'),
-      cta: t('pricing.starter.cta'),
-      features: [
-        t('pricing.feature.manual'),
-        t('pricing.feature.analytics'),
-        t('pricing.feature.account_1'),
-        t('pricing.feature.charts'),
-      ],
-      buttonBg: 'bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)] hover:bg-[var(--border-subtle)]',
-      borderColor: 'border-[var(--border-subtle)]',
-    },
-    {
-      id: 'beta',
-      name: t('pricing.plan.pro.name'),
-      desc: t('pricing.plan.pro.desc'),
-      price: t('pricing.pro.price'),
-      cta: t('pricing.cta.trial'),
-      popular: true,
-      features: [
-        t('pricing.feature.manual'),
-        t('pricing.feature.ai_edge'),
-        t('pricing.feature.psych'),
-        t('pricing.feature.filter'),
-        t('pricing.feature.support'),
-      ],
-      buttonBg: 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20 hover:bg-brand-primary/90',
-      borderColor: 'border-brand-primary/50',
-    },
-    {
-      id: 'future',
-      name: t('pricing.plan.elite.name'),
-      desc: t('pricing.plan.elite.desc'),
-      price: t('pricing.elite.price'),
-      cta: t('pricing.elite.cta'),
-      features: [
-        t('pricing.feature.early_access'),
-        t('pricing.future.imports'),
-        t('pricing.future.reports'),
-        t('pricing.future.teams'),
-      ],
-      buttonBg: 'bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)] hover:bg-[var(--border-subtle)]',
-      borderColor: 'border-[var(--border-subtle)]',
-    },
+  const plans=[
+    {name:'Free',price:0,features:en?['1 personal trading account','Manual records and CSV import','Up to 2 screenshots per trade','Review notes and performance views','30 AI requests/month, up to 5/day']:['1 个真实交易账户','手动记录与 CSV 导入','每笔交易最多 2 张截图','复盘笔记与表现统计','AI 每月 30 次，每日最多 5 次']},
+    {name:'Pro',price:market?.prices.pro[yearly?'yearly':'monthly'],features:en?['Up to 3 personal accounts','Up to 1,000 trade records','Multiple screenshots per trade','300 AI requests/month, up to 30/day','Calendar and performance views']:['最多 3 个真实交易账户','最多 1,000 条交易记录','每笔交易支持多张截图','AI 每月 300 次，每日最多 30 次','交易日历与表现统计']},
+    {name:'Elite',price:market?.prices.elite[yearly?'yearly':'monthly'],features:en?['Everything in Pro','No trading account count limit','No trade record count limit','600 AI requests/month, up to 60/day']:['包含 Pro 功能','不限真实交易账户数量','不限交易记录数量','AI 每月 600 次，每日最多 60 次']},
   ];
-
-  const faqs = [
-    { q: t('faq.q1'), a: t('faq.a1') },
-    { q: t('faq.q2'), a: t('faq.a2') },
-    { q: t('faq.q3'), a: t('faq.a3') },
-    { q: t('pricing.faq.q4'), a: t('pricing.faq.a4') },
-    { q: t('pricing.faq.q5'), a: t('pricing.faq.a5') },
-  ];
-
-  return (
-    <main className="min-h-screen bg-[var(--bg-main)] pt-32 relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-brand-primary/5 blur-[120px] rounded-full pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 relative z-10">
-        <div className="text-center mb-16">
-          <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-6"
-          >
-            <Sparkles className="w-4 h-4" />
-            {t('pricing.beta.badge')}
-          </motion.div>
-          <motion.h1
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-6xl font-bold text-[var(--text-main)] mb-6 tracking-tight"
-          >
-            {t('pricing.title')}
-          </motion.h1>
-          <motion.p
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-[var(--text-muted)] max-w-3xl mx-auto leading-relaxed"
-          >
-            {t('pricing.desc')}
-          </motion.p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {plans.map((plan, index) => (
-            <motion.div
-              key={plan.id}
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * index }}
-              className={cn(
-                'relative rounded-[2rem] border bg-[var(--card-bg)] p-8 flex flex-col transition-all duration-300',
-                plan.borderColor,
-                plan.popular && 'shadow-2xl shadow-brand-primary/10'
-              )}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-primary text-white text-[10px] font-bold uppercase tracking-widest">
-                  {t('pricing.popular')}
-                </div>
-              )}
-
-              <h3 className="text-2xl font-bold text-[var(--text-main)] mb-2">{plan.name}</h3>
-              <p className="text-[var(--text-muted)] text-sm mb-8 min-h-[56px] leading-relaxed">{plan.desc}</p>
-
-              <div className="flex items-baseline gap-1 mb-8">
-                <span className="text-4xl font-bold text-[var(--text-main)]">{plan.price}</span>
-              </div>
-
-              <a
-                data-cta={`pricing-${plan.id}`} href="https://dashboard.tradegrail.net?auth=signup"
-                className={cn('w-full py-4 rounded-2xl font-bold transition-all duration-300 mb-10 text-center', plan.buttonBg)}
-              >
-                {plan.cta}
-              </a>
-
-              <div className="space-y-4">
-                {plan.features.map((feature) => (
-                  <div key={feature} className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-emerald-500 shrink-0" />
-                    <span className="text-sm text-[var(--text-main)]">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mb-24 p-8 rounded-[2rem] bg-[var(--card-bg)] border border-[var(--border-subtle)]">
-          <h2 className="text-2xl font-bold text-[var(--text-main)] mb-4">{t('pricing.beta.title')}</h2>
-          <p className="text-[var(--text-muted)] leading-relaxed max-w-4xl">{t('pricing.beta.desc')}</p>
-        </div>
-
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-[var(--text-main)] mb-4">{t('faq.title')}</h2>
-            <p className="text-[var(--text-muted)]">{t('pricing.faq.desc')}</p>
-          </div>
-          <div className="space-y-4">
-            {faqs.map((faq) => (
-              <details key={faq.q} className="group rounded-2xl border border-[var(--border-subtle)] bg-[var(--card-bg)] overflow-hidden">
-                <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
-                  <span className="font-bold text-[var(--text-main)]">{faq.q}</span>
-                  <HelpCircle className="w-5 h-5 text-[var(--text-muted)] group-open:rotate-180 transition-transform" />
-                </summary>
-                <div className="px-6 pb-6 text-[var(--text-muted)] leading-relaxed">
-                  {faq.a}
-                </div>
-              </details>
-            ))}
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </main>
-  );
-};
-
-export default PricingPage;
+  return <><main className="guide-main"><header className="guide-hero"><p className="guide-eyebrow">TradeGrail</p><h1>{en?'Start free. Choose a plan when you need it.':'先免费体验，再按需要选择方案。'}</h1><p>{en?'Start with a free account. Local payment options appear in the app when billing setup is complete.':'现在可先注册免费账户；当地付款方案会在支付配置完成后于应用内开放。'}</p></header>
+    <p className="mb-5 text-[var(--text-muted)]">{market?(market.currency==='CNY'?'人民币 · 中国支付渠道 · 预付费，到期不自动扣款':(en?'USD · Creem checkout · Auto-renewing subscription':'美元 · Creem 支付 · 自动续费，可取消后续续费')):(failed?<>{en?'Unable to load local prices.':'暂时无法加载当地价格。'} <button onClick={()=>setRetry(x=>x+1)}>{en?'Retry':'重试'}</button></>:(en?'Loading local prices…':'正在确认当地价格…'))}</p><div className="flex gap-3 mb-8" aria-label={en?'Billing period':'付款周期'}><button onClick={()=>setYearly(false)} aria-pressed={!yearly} className={`px-5 py-3 rounded-xl border ${!yearly?'border-brand-primary text-brand-primary':'border-[var(--border-subtle)]'}`}>{en?'Monthly':'月付'}</button><button onClick={()=>setYearly(true)} aria-pressed={yearly} className={`px-5 py-3 rounded-xl border ${yearly?'border-brand-primary text-brand-primary':'border-[var(--border-subtle)]'}`}>{en?'Yearly — charged annually':'年付 · 整年一次收取'}</button></div>
+    <div className="grid md:grid-cols-3 gap-6">{plans.map(plan=><section key={plan.name} className="rounded-2xl p-7 border border-[var(--border-subtle)] bg-[var(--card-bg)]"><h2 className="text-2xl font-bold mb-4">{plan.name}</h2><p className="text-4xl font-bold mb-2">{market?`${sign}${plan.price}`:(plan.name==='Free'?'0':(en?'Loading…':'加载中…'))}<span className="text-base font-normal text-[var(--text-muted)]"> / {yearly&&plan.name!=='Free'?(en?'year':'年'):(en?'month':'月')}</span></p>{plan.name!=='Free'&&market&&<p className="text-sm text-[var(--text-muted)] mb-5">{yearly?(en?'Charged once for the full year.':'一次收取整年费用。'):(en?'Monthly plan.':'按月方案。')}</p>}<ul className="space-y-3 my-6">{plan.features.map(f=><li key={f} className="flex gap-2 text-sm"><Check size={17} className="shrink-0 text-brand-primary"/>{f}</li>)}</ul><a data-cta={`pricing-${plan.name.toLowerCase()}`} className="inline-block rounded-xl bg-brand-primary text-white px-5 py-3" href="https://dashboard.tradegrail.net?auth=signup">{en?'Create a free account':'创建免费账户'}</a></section>)}</div>
+    <section className="guide-article mt-12"><h2>{en?'Know what you are paying for':'付款前需要了解'}</h2><p>{en?'Payment options follow your network region, independently of interface language. Domestic prepaid plans do not automatically renew; Creem subscriptions renew until canceled. Applicable taxes and the final total are shown before payment. Annual prices are charged once for the full year. You can cancel future renewals in the in-app billing portal; paid access continues through the paid period unless refunded or disputed.':'支付方式根据网络地区显示，与界面语言无关。国内预付费方案到期不自动扣款；Creem 订阅会自动续费，直至取消。适用税费和最终总额会在付款前显示；年付一次收取整年费用。可在应用内账单门户取消后续续费，已付款期限内仍可使用，退款或支付争议导致权益撤销的除外。'}</p><p>{en?'AI quotas reset each UTC calendar month, including annual plans, without rollover. Existing paid users retain their purchased entitlements.':'AI 额度按 UTC 自然月重置，年付同样按月发放，不结转。原有付费用户保留已购权益。'}</p><p>{en?'No trade execution, signals, managed trading or guaranteed returns are included. Licensed chart feeds and broker imports have separate limits.':'方案不包含代客下单、交易信号、资金管理或收益承诺。图表行情授权和券商导入有各自边界。'}</p><p>{en?'Request a full refund within seven days of payment by contacting ':'付款后七天内，可联系客服申请全额退款：'}<a href="mailto:ueochen@gmail.com">ueochen@gmail.com</a>{en?'.':'。'}</p><div className="flex gap-5 flex-wrap">{[['/terms',en?'Terms':'服务条款'],['/privacy',en?'Privacy':'隐私政策'],['/refunds',en?'Refunds & cancellation':'退款与取消']].map(([path,label])=><a key={path} href={localePath(path,en?'en':'zh')}>{label}</a>)}</div></section>
+  </main><Footer/></>;
+}

@@ -13,6 +13,9 @@ export const basePaths = [
   "/guides",
   "/futures-trading-journal",
   "/about",
+  "/terms",
+  "/privacy",
+  "/refunds",
   ...guides.zh.map((g) => `/guides/${g.slug}`),
 ];
 export const publicPaths = basePaths.flatMap((p) => [
@@ -33,6 +36,9 @@ export function pageInfo(pathname: string) {
         "/futures-trading-journal":
           "Futures Trading Journal for GC, NQ & ES | TradeGrail",
         "/about": "About TradeGrail | Trading Journal & Review Software",
+        "/terms": "Terms of Service | TradeGrail",
+        "/privacy": "Privacy Policy | TradeGrail",
+        "/refunds": "Refund & Cancellation Policy | TradeGrail",
       }
     : {
         "/": "交易日志与交易复盘工具｜TradeGrail",
@@ -41,6 +47,9 @@ export function pageInfo(pathname: string) {
         "/futures-trading-journal":
           "期货交易日志：GC、NQ、ES 截图与费用复盘｜TradeGrail",
         "/about": "关于 TradeGrail｜交易记录与复盘软件",
+        "/terms": "服务条款｜TradeGrail",
+        "/privacy": "隐私政策｜TradeGrail",
+        "/refunds": "退款与取消政策｜TradeGrail",
       };
   const descriptions: Record<string, string> = en
     ? {
@@ -53,6 +62,9 @@ export function pageInfo(pathname: string) {
           "Keep GC, NQ and ES trade records, screenshots, fees and review notes together. Learn standard-contract calculations and the limits of embedded chart data.",
         "/about":
           "Learn what TradeGrail does, who it is for, which review workflows are available, and which capabilities are outside its current beta scope.",
+        "/terms": "Read TradeGrail's software service, subscription, renewal and cancellation terms.",
+        "/privacy": "How TradeGrail handles account data, journal content, AI requests, payments and privacy requests.",
+        "/refunds": "How to request a refund, cancel renewals and get help with a TradeGrail payment.",
       }
     : {
         "/": "用 TradeGrail 记录交易、图表截图、手续费与净盈亏，按账户和策略复盘执行。支持手动记录与 CSV 导入，免费完成第一笔交易记录。",
@@ -64,6 +76,9 @@ export function pageInfo(pathname: string) {
           "集中记录 GC、NQ、ES 期货交易的价格、截图、手续费与净盈亏，复盘执行过程。支持手动记录与费用模板，清楚说明合约计算和行情授权边界。",
         "/about":
           "了解 TradeGrail 的交易日志、截图、执行复盘和账户工作流，以及当前 Beta 阶段的产品范围与限制。",
+        "/terms": "了解 TradeGrail 软件服务、订阅、续费与取消条款。",
+        "/privacy": "了解 TradeGrail 如何处理账户、交易日志、AI 请求、付款及隐私申请。",
+        "/refunds": "了解如何申请退款、取消续费并处理 TradeGrail 付款问题。",
       };
   const known = publicPaths.includes(path);
   return {

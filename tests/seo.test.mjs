@@ -14,8 +14,8 @@ const pages = new Map(
   ),
 );
 
-test("all 16 public pages contain meaningful initial HTML, unique titles and matching canonicals", () => {
-  assert.equal(urls.length, 16);
+test("all 22 public pages contain meaningful initial HTML, unique titles and matching canonicals", () => {
+  assert.equal(urls.length, 22);
   const titles = new Set();
   for (const [p, html] of pages) {
     const title = html.match(/<title>(.*?)<\/title>/)?.[1];
@@ -86,7 +86,7 @@ test("all internal page and asset links resolve; discovery files have actual non
   assert.match(robots, /Sitemap: https:\/\/www.tradegrail.net\/sitemap.xml/);
   assert.ok(!robots.includes("<html"));
   assert.match(await readFile("dist/llms.txt", "utf8"), /^# TradeGrail/);
-  assert.match(await readFile("dist/pricing.md", "utf8"), /USD 0/);
+  assert.match(await readFile("dist/pricing.md", "utf8"), /Free to start/);
 });
 test("sitemap excludes auth, checkout and 404, with a real noindex error document", async () => {
   assert.doesNotMatch(sitemap, /<loc>[^<]*(?:login|signup|checkout|404)/);
@@ -117,4 +117,13 @@ test("high-intent guides include actionable scope, sourced examples, related lin
     pages.get("/"),
     /12,847|847.*名交易者|已支持以下券商，自动同步交易数据/,
   );
+});
+
+
+test('public legal and pricing HTML does not disclose private operator identity or mix payment currencies',async()=>{
+  for(const path of ['terms','privacy','refunds','en/terms','en/privacy','en/refunds','pricing','en/pricing']) {
+    const html=await readFile(new URL('../dist/'+path+'.html',import.meta.url),'utf8');
+    assert.doesNotMatch(html,/陈峙樳|Chen Zhixun|东华南路|湖景华厦|510080/);
+    if(path.endsWith('pricing'))assert.doesNotMatch(html,/(?:US\$|¥)\d/);
+  }
 });

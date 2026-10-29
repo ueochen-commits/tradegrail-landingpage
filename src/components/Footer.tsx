@@ -143,7 +143,7 @@ export const Footer = () => {
             <ul className="space-y-4">
               {[
                 { key: 'footer.support.help', label: t('footer.support.help'), href: localized('/guides/first-trade') },
-                { key: 'footer.support.contact', label: language === 'en' ? 'Futures journal' : '期货交易日志', href: localized('/futures-trading-journal') }
+                { key: 'footer.support.contact', label: 'ueochen@gmail.com', href: 'mailto:ueochen@gmail.com' }
               ].map(link => (
                 <li key={link.key}><a href={link.href} className="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">{link.label}</a></li>
               ))}
@@ -154,10 +154,11 @@ export const Footer = () => {
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] mb-6">{t('footer.legal')}</h4>
             <ul className="space-y-4">
               {[
-                { key: 'footer.legal.risk', label: t('footer.legal.risk') },
-                { key: 'footer.legal.privacy', label: t('footer.legal.privacy') }
+                { key: 'footer.legal.terms', label: language === 'en' ? 'Terms of Service' : '服务条款', href: localized('/terms') },
+                { key: 'footer.legal.privacy', label: t('footer.legal.privacy'), href: localized('/privacy') },
+                { key: 'footer.legal.refunds', label: language === 'en' ? 'Refunds & cancellation' : '退款与取消', href: localized('/refunds') }
               ].map(link => (
-                <li key={link.key}><span className="text-sm text-[var(--text-muted)]">{link.label}</span></li>
+                <li key={link.key}><a href={link.href} className="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)]">{link.label}</a></li>
               ))}
             </ul>
           </div>

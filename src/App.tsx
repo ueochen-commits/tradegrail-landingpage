@@ -7,6 +7,7 @@ import LandingPage from "./pages/LandingPage";
 import PricingPage from "./pages/PricingPage";
 import GuidesPage from "./pages/GuidesPage";
 import ProductFactsPage from "./pages/ProductFactsPage";
+import LegalPage from "./pages/LegalPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import CheckoutPage from "./pages/CheckoutPage";
@@ -95,6 +96,7 @@ export function SiteContent() {
               path={localePath("/about", lang)}
               element={<ProductFactsPage />}
             />,
+            ...['terms','privacy','refunds'].map(key=><Route key={`${lang}-${key}`} path={localePath('/'+key,lang)} element={<LegalPage/>}/>),
           ])}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />

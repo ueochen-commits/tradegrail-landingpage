@@ -1,10 +1,10 @@
 # TradeGrail Product Marketing Context
 
-**Document version:** v1
+**Document version:** v2 (billing preparation; not yet published)
 **Last updated:** 2026-10-29
 
 ## Product Overview
-TradeGrail is a web trading journal and post-trade review tool. Users record trades, screenshots, costs, reasons and review notes, then inspect account/strategy performance. This is software for recording and reflection; it does not execute orders or promise returns. Public site: https://www.tradegrail.net. Authenticated app: https://dashboard.tradegrail.net. Early beta; start with free access. Paid plan availability and final prices must be checked in the app; do not invent prices or mature commercial guarantees.
+TradeGrail is a web trading journal and post-trade review tool. Users record trades, screenshots, costs, reasons and review notes, then inspect account/strategy performance. This is software for recording and reflection; it does not execute orders or promise returns. Public site: https://www.tradegrail.net. Authenticated app: https://dashboard.tradegrail.net. Early beta; start with free access. Draft launch prices: USD Pro $9/month or $90/year; Elite $19/month or $190/year. Mainland China IPs: CNY Pro 29/month or 290/year; Elite 69/month or 690/year. Payment currency/provider follows server-derived IP country, not interface language. Display one currency only. New plan AI quotas: Free 30/month (5/day), Pro 300/month (30/day), Elite 600/month (60/day); preserve existing paid entitlements. Prices and quotas are under local acceptance, not published. Real USD checkout remains disabled pending new sandbox acceptance, merchant approval and owner resumption. Do not publish the operator’s personal name or private address. Merchant verification retains legal identity privately.
 
 ## Target Audience
 Primary working hypothesis: Chinese-speaking active traders who want a repeatable review process, especially GC/NQ/ES futures users reflected in current customer feedback. Secondary: English-speaking traders with the same manual/CSV journaling need. These are priorities to test, not researched market-size claims.
