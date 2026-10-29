@@ -1,5 +1,32 @@
 {
-  "rewrites": [
-    { "source": "/((?!assets|api).*)", "destination": "/index.html" }
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/login",
+      "destination": "https://dashboard.tradegrail.net?auth=login",
+      "permanent": false
+    },
+    {
+      "source": "/signup",
+      "destination": "https://dashboard.tradegrail.net?auth=signup",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "destination": "https://dashboard.tradegrail.net",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/checkout",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
   ]
 }

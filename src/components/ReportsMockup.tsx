@@ -154,8 +154,8 @@ export const ReportsMockup = () => {
               <div className="absolute left-0 right-0 h-px bg-[var(--text-main)]/10 top-1/2 z-0" />
               
               {Array.from({ length: 30 }).map((_, i) => {
-                const isPositive = Math.random() > 0.4;
-                const height = Math.random() * 40 + 10;
+                const isPositive = (i * 7) % 10 > 3;
+                const height = ((i * 17 + 3) % 40) + 10;
                 return (
                   <div key={i} className="flex-1 flex flex-col items-center h-full relative z-10">
                     {isPositive ? (

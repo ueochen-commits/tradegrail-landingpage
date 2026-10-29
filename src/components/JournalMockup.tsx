@@ -199,7 +199,7 @@ const Annotation = ({ className, text, delay, direction = 'top', color = 'indigo
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={false}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay, duration: 0.5 }}
       className={cn("absolute z-40 flex flex-col items-center gap-2 pointer-events-none", className)}

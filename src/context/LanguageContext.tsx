@@ -10,6 +10,8 @@ interface LanguageContextType {
 
 const translations: Record<Language, Record<string, string>> = {
   zh: {
+    'nav.theme.light': '浅色',
+    'nav.theme.dark': '深色',
     'nav.features': '产品',
     'nav.products': '产品',
     'nav.solutions': '解决方案',
@@ -33,11 +35,11 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.resources.faq.desc': '解答你最关心的问题',
     'nav.view_all': '查看全部功能',
     'hero.badge': '公开构建中的交易复盘 SaaS',
-    'hero.title': '把每笔交易变成',
-    'hero.title.accent': '可复盘的决策记录。',
-    'hero.desc': 'TradeGrail 正在从 AI 编程原型走向专业交易复盘 SaaS。当前重点是交易日志、执行复盘、风险纪律追踪和谨慎的 AI 辅助总结。',
-    'hero.cta': '加入早期体验',
-    'hero.demo': '进入登录',
+    'hero.title': '交易日志与复盘',
+    'hero.title.accent': '把记录变成改进依据。',
+    'hero.desc': '集中记录入场理由、图表截图、手续费与净盈亏，按账户和策略复盘执行。支持手动记录与 CSV 导入，先免费完成第一笔交易记录。',
+    'hero.cta': '免费记录第一笔交易',
+    'hero.demo': '先看复盘指南',
     'hero.stats.roi': '复盘完成率',
     'hero.stats.profit_factor': '纪律评分',
     'hero.stats.traders': '早期体验',
@@ -210,11 +212,11 @@ const translations: Record<Language, Record<string, string>> = {
     'testimonials.quote9': '早期反馈收集中。',
     'faq.title': '常见问题',
     'faq.q1': '你们支持哪些券商？',
-    'faq.a1': '当前不宣传大规模券商自动同步。我们会优先打磨手动记录、CSV/导入流程，并在每个集成稳定后再公开说明。',
-    'faq.q2': '我的数据安全吗？',
-    'faq.a2': '交易数据是核心信任资产。当前我们正在清理认证、支付和数据边界；具体安全声明会以 CTO 验证后的内容为准。',
-    'faq.q3': '我可以随时取消订阅吗？',
-    'faq.a3': '早期 Beta 阶段会先保持低门槛体验。正式订阅和取消流程会在支付系统验证后公开说明。',
+    'faq.a1': '支持手动记录与 CSV 导入；自动同步以应用内实际可用的集成为准。券商没有列在列表中，也可以选择其他券商或不指定券商，创建手动账户。',
+    'faq.q2': '需要连接券商才能开始吗？',
+    'faq.a2': '不需要。你可以先创建自己的手动账户，记录一笔交易并核对结果，再决定是否使用导入或已开放的集成。',
+    'faq.q3': '免费用户可以上传截图吗？',
+    'faq.a3': '可以，免费账户每笔交易最多上传两张截图，删除后可以替换。其他方案功能和额度以应用内当前说明为准。',
     'footer.cta.tag': 'Build in Public',
     'footer.cta.title': '参与 TradeGrail 的早期共建',
     'footer.cta.desc': '如果你正在用表格、截图或零散笔记复盘交易，欢迎试用早期版本，并帮助我们把真实交易复盘流程做扎实。',
@@ -621,6 +623,10 @@ const translations: Record<Language, Record<string, string>> = {
     'checkout.back': '返回价格页面',
   },
   en: {
+    'nav.theme.light': 'Light',
+    'nav.theme.dark': 'Dark',
+    'nav.pricing': 'Pricing',
+    'nav.login': 'Sign in',
     'nav.features': 'Products',
     'nav.products': 'Products',
     'nav.solutions': 'Solutions',
@@ -640,11 +646,11 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.resources.faq.desc': 'Answers to your most common questions',
     'nav.view_all': 'View All Features',
     'hero.badge': 'Trading review SaaS, built in public',
-    'hero.title': 'Turn every trade into a',
-    'hero.title.accent': 'reviewable decision record.',
-    'hero.desc': 'TradeGrail is moving from an AI-coded prototype toward a professional trading review SaaS. The current focus is journaling, execution review, risk discipline, and careful AI-assisted summaries.',
-    'hero.cta': 'Join early access',
-    'hero.demo': 'Sign in',
+    'hero.title': 'A trading journal for',
+    'hero.title.accent': 'decisions worth reviewing.',
+    'hero.desc': 'Keep entry reasons, chart screenshots, fees and net P&L together. Review execution by account and strategy. Start free with manual entry or CSV imports.',
+    'hero.cta': 'Log your first trade free',
+    'hero.demo': 'Read the review guides',
     'hero.stats.roi': 'Review completion',
     'hero.stats.profit_factor': 'Discipline score',
     'hero.stats.traders': 'Early access',
@@ -817,11 +823,11 @@ const translations: Record<Language, Record<string, string>> = {
     'testimonials.quote9': 'Early feedback in progress.',
     'faq.title': 'Common Questions',
     'faq.q1': 'Which brokers do you support?',
-    'faq.a1': 'We are not marketing large-scale broker auto-sync yet. Manual logging and CSV/import flows come first; each integration will be announced only after it is stable.',
-    'faq.q2': 'Is my data secure?',
-    'faq.a2': 'Trading data is the core trust asset. We are currently cleaning up auth, payment, and data boundaries; public security language will follow CTO verification.',
-    'faq.q3': 'Can I cancel anytime?',
-    'faq.a3': 'During early beta, access stays low-friction. Formal subscription and cancellation flows will be explained after payment verification.',
+    'faq.a1': 'Manual entry and CSV imports are available. Automatic sync follows the integrations actually available in the app. If your broker is not listed, create a manual account using another or unspecified broker.',
+    'faq.q2': 'Do I need to connect a broker first?',
+    'faq.a2': 'No. Create your own manual account, record one trade and reconcile the result before choosing imports or an available integration.',
+    'faq.q3': 'Can free users upload screenshots?',
+    'faq.a3': 'Yes. Free accounts can attach up to two screenshots per trade and replace them after removal. Other features and limits follow the current in-app plan description.',
     'footer.cta.tag': 'Build in Public',
     'footer.cta.title': 'Join the early TradeGrail co-build',
     'footer.cta.desc': 'If you currently review trades with spreadsheets, screenshots, or scattered notes, try the early version and help us make the real review workflow stronger.',
@@ -1232,12 +1238,12 @@ const translations: Record<Language, Record<string, string>> = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>('zh');
+export const LanguageProvider: React.FC<{ children: React.ReactNode; initialLanguage?: Language }> = ({ children, initialLanguage = 'zh' }) => {
+  const [language, setLanguageState] = useState<Language>(initialLanguage);
 
   useEffect(() => {
-    localStorage.setItem('language', 'zh');
-  }, []);
+    localStorage.setItem('language', initialLanguage);
+  }, [initialLanguage]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

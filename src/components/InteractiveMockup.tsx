@@ -71,7 +71,7 @@ export const InteractiveMockup = () => {
 
       {/* Top: Equity Curve - Glassmorphism Style */}
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="flex-1 min-h-[240px] bg-[var(--text-main)]/[0.03] backdrop-blur-2xl border border-[var(--border-subtle)] rounded-3xl p-6 relative group overflow-hidden shadow-xl transition-colors duration-300"
@@ -94,7 +94,7 @@ export const InteractiveMockup = () => {
             </div>
             <div className="flex items-baseline gap-4">
               <motion.span 
-                initial={{ opacity: 0 }}
+                initial={false}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 1 }}
                 className="text-4xl font-bold text-[var(--text-main)] tracking-tighter drop-shadow-2xl"
@@ -144,7 +144,7 @@ export const InteractiveMockup = () => {
                 fillOpacity={1} 
                 fill="url(#colorValue)" 
                 animationDuration={3000}
-                animationEasing="cubic-bezier(0.16, 1, 0.3, 1)"
+                animationEasing="ease-out"
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -155,7 +155,7 @@ export const InteractiveMockup = () => {
       <div className="flex flex-col lg:flex-row gap-4 h-[280px]">
         {/* Strategy Performance - Glassmorphism */}
         <motion.div 
-          initial={{ opacity: 0, x: -20 }}
+          initial={false}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex-[1.5] bg-[var(--text-main)]/[0.03] backdrop-blur-2xl border border-[var(--border-subtle)] rounded-3xl p-6 flex flex-col relative group overflow-hidden shadow-xl transition-colors duration-300"
@@ -210,7 +210,7 @@ export const InteractiveMockup = () => {
 
         {/* AI Insights - Glassmorphism */}
         <motion.div 
-          initial={{ opacity: 0, x: 20 }}
+          initial={false}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex-1 bg-[var(--text-main)]/[0.03] backdrop-blur-2xl border border-[var(--border-subtle)] rounded-3xl p-6 relative group overflow-hidden shadow-xl transition-colors duration-300"
@@ -226,7 +226,7 @@ export const InteractiveMockup = () => {
             {insights.map((insight) => (
               <motion.div 
                 key={insight.id}
-                initial={{ opacity: 0, x: 10 }}
+                initial={false}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: insight.delay }}
                 whileHover={{ x: 5, backgroundColor: 'var(--text-main)/0.08', borderColor: 'var(--border-subtle)' }}

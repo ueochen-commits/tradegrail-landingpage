@@ -8,13 +8,15 @@ import { BackgroundAnimation } from '../components/BackgroundAnimation';
 import { Testimonials } from '../components/Testimonials';
 import { ShowcaseSection } from '../components/ShowcaseSection';
 import { useLanguage } from '../context/LanguageContext';
+import { GuidesPreview } from './GuidesPage';
+import { localePath } from '../content/guides';
 import { useTheme } from '../context/ThemeContext';
 
 import { MobileDashboardMockup } from '../components/MobileDashboardMockup';
 
 const FadeInWhenVisible = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={false}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-100px" }}
     transition={{ duration: 0.6, delay }}
@@ -25,7 +27,7 @@ const FadeInWhenVisible = ({ children, delay = 0 }: { children: React.ReactNode,
 
 export default function LandingPage() {
   const { scrollYProgress } = useScroll();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { theme } = useTheme();
   const [isMobileDark, setIsMobileDark] = React.useState(theme === 'dark');
   
@@ -37,7 +39,7 @@ export default function LandingPage() {
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
   return (
-    <div className="pt-[72px] overflow-x-hidden bg-[var(--bg-main)] text-[var(--text-main)] transition-colors duration-300 relative">
+    <main className="pt-[72px] overflow-x-hidden bg-[var(--bg-main)] text-[var(--text-main)] transition-colors duration-300 relative">
       <div className="fixed inset-0 pointer-events-none z-0">
         <BackgroundAnimation />
       </div>
@@ -55,21 +57,21 @@ export default function LandingPage() {
           className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
         >
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-5 leading-[1.1] text-[var(--text-main)]">
-              {t('hero.title')} <span className="text-brand-primary italic">{t('hero.title.accent')}</span>
+              {t('hero.title')} <span className="text-brand-primary italic block">{t('hero.title.accent')}</span>
             </h1>
             <p className="text-base sm:text-lg text-[var(--text-muted)] max-w-xl mx-auto mb-6 leading-relaxed">
               {t('hero.desc')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a href="https://dashboard.tradegrail.net?auth=signup" className="w-full sm:w-auto bg-gradient-to-r from-[#2b276f] to-[#3a33a9] hover:from-[#332e88] hover:to-[#4540c0] text-white px-8 py-3.5 rounded-xl text-base font-bold transition-all flex items-center justify-center gap-2 group shadow-[0_0_24px_-4px_rgba(58,51,169,0.45)]">
+              <a data-cta="hero" href="https://dashboard.tradegrail.net?auth=signup" className="w-full sm:w-auto bg-gradient-to-r from-[#2b276f] to-[#3a33a9] hover:from-[#332e88] hover:to-[#4540c0] text-white px-8 py-3.5 rounded-xl text-base font-bold transition-all flex items-center justify-center gap-2 group shadow-[0_0_24px_-4px_rgba(58,51,169,0.45)]">
                 {t('hero.cta')} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
-              <a href="https://dashboard.tradegrail.net?auth=login" className="w-full sm:w-auto bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)] px-8 py-3.5 rounded-xl text-base font-bold hover:bg-[var(--border-subtle)] transition-all">
+              <a href={localePath('/guides', language)} className="w-full sm:w-auto bg-[var(--card-bg)] border border-[var(--border-subtle)] text-[var(--text-main)] px-8 py-3.5 rounded-xl text-base font-bold hover:bg-[var(--border-subtle)] transition-all">
                 {t('hero.demo')}
               </a>
             </div>
@@ -391,7 +393,6 @@ export default function LandingPage() {
                   <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-bold">{plan.price}</span>
-                    <span className="text-[var(--text-muted)] text-sm">/mo</span>
                   </div>
                   <p className="text-sm text-[var(--text-muted)] mt-4">{plan.desc}</p>
                 </div>
@@ -439,8 +440,10 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <GuidesPreview />
+
       {/* Footer Section (Includes CTA) */}
       <Footer />
-    </div>
+    </main>
   );
 }

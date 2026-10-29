@@ -176,7 +176,7 @@ export const FeaturesMegaMenu: React.FC<MegaMenuProps> = ({ onClose }) => {
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 10 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
       className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-screen max-w-[1100px] bg-[var(--card-bg)] rounded-[2rem] shadow-[0_30px_100px_-20px_rgba(0,0,0,0.3)] border border-[var(--border-subtle)] overflow-hidden z-50 p-10 transition-colors duration-300"

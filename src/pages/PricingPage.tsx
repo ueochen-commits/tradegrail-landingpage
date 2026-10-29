@@ -67,13 +67,13 @@ const PricingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--bg-main)] pt-32 relative overflow-hidden">
+    <main className="min-h-screen bg-[var(--bg-main)] pt-32 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-brand-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 relative z-10">
         <div className="text-center mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-6"
           >
@@ -81,7 +81,7 @@ const PricingPage = () => {
             {t('pricing.beta.badge')}
           </motion.div>
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-6xl font-bold text-[var(--text-main)] mb-6 tracking-tight"
@@ -89,7 +89,7 @@ const PricingPage = () => {
             {t('pricing.title')}
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-xl text-[var(--text-muted)] max-w-3xl mx-auto leading-relaxed"
@@ -102,7 +102,7 @@ const PricingPage = () => {
           {plans.map((plan, index) => (
             <motion.div
               key={plan.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index }}
               className={cn(
@@ -125,7 +125,7 @@ const PricingPage = () => {
               </div>
 
               <a
-                href="https://dashboard.tradegrail.net?auth=signup"
+                data-cta={`pricing-${plan.id}`} href="https://dashboard.tradegrail.net?auth=signup"
                 className={cn('w-full py-4 rounded-2xl font-bold transition-all duration-300 mb-10 text-center', plan.buttonBg)}
               >
                 {plan.cta}
@@ -169,7 +169,7 @@ const PricingPage = () => {
         </div>
       </div>
       <Footer />
-    </div>
+    </main>
   );
 };
 

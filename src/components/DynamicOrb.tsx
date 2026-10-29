@@ -19,7 +19,7 @@ export const DynamicOrb = () => {
       >
         {/* Outer Glow */}
         <div className="absolute inset-0 rounded-full bg-brand-primary/20 blur-[80px] animate-pulse" />
-        
+
         {/* Core Sphere */}
         <div className="absolute inset-10 rounded-full bg-gradient-to-br from-brand-primary/40 via-purple-600/30 to-transparent backdrop-blur-sm border border-white/10 overflow-hidden">
           {/* Intricate Patterns (SVG) */}
@@ -31,7 +31,7 @@ export const DynamicOrb = () => {
               </radialGradient>
             </defs>
             <circle cx="50%" cy="50%" r="48" fill="url(#sphereGrad)" />
-            
+
             {/* Grid Lines */}
             {[...Array(12)].map((_, i) => (
               <motion.ellipse
@@ -44,7 +44,7 @@ export const DynamicOrb = () => {
                 style={{ rotate: `${i * 15}deg` }}
               />
             ))}
-            
+
             {/* Moving Light Trails */}
             <motion.circle
               cx="50" cy="50" r="40"
@@ -62,7 +62,7 @@ export const DynamicOrb = () => {
               </linearGradient>
             </defs>
           </svg>
-          
+
           {/* Internal Glows */}
           <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-white/10 blur-2xl rounded-full" />
         </div>
@@ -72,24 +72,24 @@ export const DynamicOrb = () => {
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-brand-primary rounded-full"
-            initial={{ 
-              x: Math.random() * 500, 
-              y: Math.random() * 500,
-              opacity: Math.random() 
+            initial={{
+              x: ((i * 137 + 23) % 500),
+              y: ((i * 137 + 23) % 500),
+              opacity: ((i * 3 + 1) % 10) / 10
             }}
             animate={{
-              y: [null, Math.random() * -100, null],
+              y: [null, -((i * 19 + 7) % 100), null],
               opacity: [0.2, 0.8, 0.2],
             }}
             transition={{
-              duration: 3 + Math.random() * 5,
+              duration: 3 + ((i * 7) % 5),
               repeat: Infinity,
               ease: "easeInOut"
             }}
           />
         ))}
       </motion.div>
-      
+
       {/* Background Atmosphere */}
       <div className="absolute inset-0 bg-radial-gradient from-brand-primary/5 to-transparent blur-3xl pointer-events-none" />
     </div>

@@ -244,7 +244,7 @@ export const NotebookMockup = () => {
           <div className="p-8 relative">
             <div className="max-w-3xl mx-auto space-y-6">
               <motion.div 
-                initial={{ opacity: 0 }}
+                initial={false}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
                 className="text-lg text-[var(--text-main)]/80 leading-relaxed min-h-[400px] outline-none font-sans"
@@ -386,7 +386,7 @@ const Annotation = ({ className, text, delay, direction = 'top', color = 'indigo
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={false}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay, duration: 0.5 }}
       className={cn("absolute z-40 flex flex-col items-center gap-2 pointer-events-none", className)}

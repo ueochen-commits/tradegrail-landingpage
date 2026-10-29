@@ -37,7 +37,7 @@ export const Testimonials: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-4xl sm:text-6xl font-bold mb-6 tracking-tight text-[var(--text-main)]"
@@ -45,7 +45,7 @@ export const Testimonials: React.FC = () => {
             {t('testimonials.title')}
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
@@ -61,7 +61,7 @@ export const Testimonials: React.FC = () => {
             return (
               <motion.div
                 key={note.titleKey}
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
@@ -79,7 +79,7 @@ export const Testimonials: React.FC = () => {
 
         <div className="mt-32 text-center">
           <motion.h3
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-3xl sm:text-5xl font-bold mb-8 tracking-tight text-[var(--text-main)] max-w-4xl mx-auto leading-tight"
@@ -87,7 +87,7 @@ export const Testimonials: React.FC = () => {
             {t('testimonials.community.title')}
           </motion.h3>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
@@ -97,12 +97,12 @@ export const Testimonials: React.FC = () => {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={false}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <a href="https://dashboard.tradegrail.net?auth=signup" className="inline-flex items-center gap-3 bg-brand-primary text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-brand-primary/90 transition-all group shadow-[0_0_40px_-10px_rgba(99,102,241,0.5)]">
+            <a data-cta="build-public" href="https://dashboard.tradegrail.net?auth=signup" className="inline-flex items-center gap-3 bg-brand-primary text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-brand-primary/90 transition-all group shadow-[0_0_40px_-10px_rgba(99,102,241,0.5)]">
               {t('hero.cta')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
           </motion.div>

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "created": "2026-10-29",
+  "status": "planned; actual cross-engine answer monitoring not configured",
+  "measurement": "3 runs per prompt per engine monthly when access exists. Keep locales and markets separate. Citation, mention, recommendation and accuracy are separate observations.",
+  "prompts": [
+    {"id":"zh-category","locale":"zh-CN","intent":"tool selection","prompt":"想把交易截图、手续费和复盘笔记放在一起，有哪些交易日志工具适合先手动记录？"},
+    {"id":"zh-futures","locale":"zh-CN","intent":"futures journal","prompt":"做 GC、NQ、ES 期货，怎样选择能区分毛盈亏和净盈亏的交易日志？"},
+    {"id":"zh-template","locale":"zh-CN","intent":"usable template","prompt":"交易日志应该记录哪些字段？给我一份能直接使用的交易复盘模板。"},
+    {"id":"zh-manual","locale":"zh-CN","intent":"broker compatibility","prompt":"我的券商不在列表里，还能用交易日志软件手动记交易吗？"},
+    {"id":"zh-brand","locale":"zh-CN","intent":"brand accuracy control","prompt":"TradeGrail.net 是什么产品？免费账户能否上传截图，是否必须绑定券商？"},
+    {"id":"zh-cost","locale":"zh-CN","intent":"fees and net basis","prompt":"交易报表的盈亏已经扣过手续费，导入交易日志时怎样避免重复扣费？"},
+    {"id":"en-category","locale":"en","intent":"tool selection","prompt":"What trading journal tools let me start manually and keep chart screenshots, commissions and review notes together?"},
+    {"id":"en-futures","locale":"en","intent":"futures journal","prompt":"What should I look for in a trading journal for standard GC, NQ and ES futures?"},
+    {"id":"en-template","locale":"en","intent":"usable template","prompt":"What fields should a practical trading journal template contain, including fees and execution review?"},
+    {"id":"en-manual","locale":"en","intent":"broker compatibility","prompt":"Can I use a trading journal without connecting my broker, and how should I test it with one trade?"},
+    {"id":"en-brand","locale":"en","intent":"brand accuracy control","prompt":"What is TradeGrail.net, what does its free plan include, and does it require a broker connection?"},
+    {"id":"en-cost","locale":"en","intent":"fees and net basis","prompt":"How do I avoid deducting commissions twice when importing net P&L into a trading journal?"}
+  ]
+}

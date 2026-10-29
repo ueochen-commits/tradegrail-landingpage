@@ -145,8 +145,8 @@ export const AnalysisMockup = () => {
             {/* Simulated Candlesticks */}
             <div className="absolute inset-0 flex items-end justify-around px-12 pb-20 pointer-events-none">
               {Array.from({ length: 24 }).map((_, i) => {
-                const height = 40 + Math.random() * 100;
-                const isUp = Math.random() > 0.4;
+                const height = 40 + ((i * 37 + 11) % 100);
+                const isUp = (i * 7) % 10 > 3;
                 return (
                   <div key={i} className="flex flex-col items-center gap-0.5">
                     <div className={cn("w-[2px] h-4", isUp ? "bg-emerald-500/40" : "bg-red-500/40")} />
@@ -162,7 +162,7 @@ export const AnalysisMockup = () => {
 
             {/* Entry/Exit Markers */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0 }}
+              initial={false}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1 }}
               className="absolute top-1/3 left-1/2 -translate-x-1/2 flex flex-col items-center"
@@ -174,7 +174,7 @@ export const AnalysisMockup = () => {
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, scale: 0 }}
+              initial={false}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.5 }}
               className="absolute top-1/4 right-1/4 flex flex-col items-center"
@@ -201,7 +201,7 @@ export const AnalysisMockup = () => {
 
             {/* Floating Mistakes/Setups Card (Bottom Left) */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={false}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 3 }}
               className="absolute bottom-4 left-4 w-64 bg-[var(--card-bg)] border border-[var(--border-subtle)] rounded-xl shadow-2xl p-4 space-y-4 z-30"
@@ -238,7 +238,7 @@ export const AnalysisMockup = () => {
 
             {/* Floating Running P&L Card (Bottom Right) */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={false}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 3.5 }}
               className="absolute bottom-4 right-4 w-72 bg-[var(--card-bg)] border border-[var(--border-subtle)] rounded-xl shadow-2xl p-4 z-30"
@@ -329,7 +329,7 @@ const Annotation = ({ className, text, delay, direction = 'top', color = 'indigo
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.5 }}
       className={cn("absolute z-40 flex flex-col items-center gap-2 pointer-events-none", className)}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { localePath } from '../content/guides';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
@@ -11,7 +12,8 @@ import { TradeGrailLogo } from './Logo';
 import { useLanguage } from '../context/LanguageContext';
 
 export const Footer = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const localized = (path: string) => localePath(path, language);
 
   return (
     <footer className="relative bg-[var(--bg-main)] text-[var(--text-main)] pt-20 pb-10 overflow-hidden transition-colors duration-300">
@@ -20,7 +22,7 @@ export const Footer = () => {
         {/* CTA Section - Large Rounded Card */}
         <div className="mb-32">
           <motion.div 
-            initial={{ opacity: 0, y: 40 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="relative rounded-[3.5rem] p-16 sm:p-24 lg:p-32 text-center overflow-hidden bg-[#0a0a0a] border border-white/5 shadow-2xl group transition-all duration-700"
@@ -39,7 +41,7 @@ export const Footer = () => {
 
             <div className="relative z-10 max-w-4xl mx-auto">
               <motion.span 
-                initial={{ opacity: 0, y: 10 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
                 className="inline-block text-[#ff4e9e] font-bold text-xs uppercase tracking-[0.4em] mb-8"
@@ -47,7 +49,7 @@ export const Footer = () => {
                 {t('footer.cta.tag')}
               </motion.span>
               <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
                 className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-10 tracking-tight leading-[0.95] text-white"
@@ -55,7 +57,7 @@ export const Footer = () => {
                 {t('footer.cta.title')}
               </motion.h2>
               <motion.p 
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
                 className="text-white/60 text-lg sm:text-xl lg:text-2xl mb-14 leading-relaxed max-w-3xl mx-auto font-medium"
@@ -63,12 +65,12 @@ export const Footer = () => {
                 {t('footer.cta.desc')}
               </motion.p>
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={false}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 }}
               >
                 <a
-                  href="https://dashboard.tradegrail.net?auth=signup"
+                  data-cta="footer" href="https://dashboard.tradegrail.net?auth=signup"
                   className="inline-flex items-center gap-3 bg-[#3D3A8C] text-white px-12 py-5 rounded-2xl text-xl font-bold hover:bg-[#2D2A7A] transition-all active:scale-95 shadow-[0_0_40px_rgba(61,58,140,0.4)] hover:shadow-[0_0_60px_rgba(61,58,140,0.6)]"
                 >
                   {t('footer.cta.button')} <ArrowRight className="w-6 h-6" />
@@ -108,10 +110,10 @@ export const Footer = () => {
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] mb-6">{t('footer.product')}</h4>
             <ul className="space-y-4">
               {[
-                { key: 'footer.product.analytics', label: t('footer.product.analytics'), to: '/#features' },
-                { key: 'footer.product.assistant', label: t('footer.product.assistant'), to: '/#features' },
-                { key: 'footer.product.pricing', label: t('footer.product.pricing'), to: '/pricing' },
-                { key: 'footer.product.whatsnew', label: t('footer.product.whatsnew'), to: '/#build-public' }
+                { key: 'footer.product.analytics', label: t('footer.product.analytics'), to: localized('/')+'#features' },
+                { key: 'footer.product.assistant', label: t('footer.product.assistant'), to: localized('/')+'#features' },
+                { key: 'footer.product.pricing', label: t('footer.product.pricing'), to: localized('/pricing') },
+                { key: 'footer.product.whatsnew', label: t('footer.product.whatsnew'), to: localized('/')+'#build-public' }
               ].map(link => (
                 <li key={link.key}>
                   {link.to.startsWith('/') ? (
@@ -128,8 +130,8 @@ export const Footer = () => {
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] mb-6">{t('footer.company')}</h4>
             <ul className="space-y-4">
               {[
-                { key: 'footer.company.about', label: t('footer.company.about'), href: '/#build-public' },
-                { key: 'footer.company.blog', label: t('footer.company.blog'), href: '/#build-public' }
+                { key: 'footer.company.about', label: t('footer.company.about'), href: localized('/about') },
+                { key: 'footer.company.blog', label: language === 'en' ? 'Review guides' : '复盘指南', href: localized('/guides') }
               ].map(link => (
                 <li key={link.key}><a href={link.href} className="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">{link.label}</a></li>
               ))}
@@ -140,8 +142,8 @@ export const Footer = () => {
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] mb-6">{t('footer.support')}</h4>
             <ul className="space-y-4">
               {[
-                { key: 'footer.support.help', label: t('footer.support.help'), href: '/#build-public' },
-                { key: 'footer.support.contact', label: t('footer.support.contact'), href: 'https://dashboard.tradegrail.net?auth=signup' }
+                { key: 'footer.support.help', label: t('footer.support.help'), href: localized('/guides/first-trade') },
+                { key: 'footer.support.contact', label: language === 'en' ? 'Futures journal' : '期货交易日志', href: localized('/futures-trading-journal') }
               ].map(link => (
                 <li key={link.key}><a href={link.href} className="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">{link.label}</a></li>
               ))}
@@ -160,6 +162,8 @@ export const Footer = () => {
             </ul>
           </div>
         </div>
+
+        <div className="flex gap-5 text-xs text-[var(--text-muted)] mb-8"><a href="/sitemap.xml">Sitemap</a><a href="/llms.txt">AI overview</a></div>
 
         {/* Footer Bottom */}
         <div className="pt-10 border-t border-[var(--border-subtle)] flex flex-col gap-10">

@@ -75,3 +75,9 @@ npm run preview  # Preview the production build locally
 npm run lint     # Type-check the project
 npm run clean    # Remove build output
 ```
+
+## SEO / GEO content and deployment
+
+The production build prerenders 16 canonical Chinese/English public pages using the same React routes, then hydrates them in the browser. Add or update guide content in `src/content/guides.ts` and metadata in `src/lib/seo.ts`; keep locale counterparts reciprocal. `scripts/prerender.mjs` generates HTML, discovery files and a real noindex error document. Vercel serves static clean URLs and explicit dashboard-auth redirects rather than rewriting every unknown URL to the homepage.
+
+Growth strategy and editorial scope: `growth/README.md`. Acceptance: `growth/ACCEPTANCE.md`. Run `npm run lint`, `npm run build`, `npm run test:seo` and `node scripts/check-live-seo.mjs` when changing public content or routing. Never treat a successful HTTP check or an llms.txt file as proof of indexing, AI recommendation or user acquisition. Search Console/analytics integration remains access-dependent.

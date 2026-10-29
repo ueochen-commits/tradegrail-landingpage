@@ -181,7 +181,7 @@ export const FeatureShowcase = () => {
           <div className={activeTab === 'journal' ? 'block' : 'hidden'}>
             <motion.div
               key="journal-img"
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: activeTab === 'journal' ? 1 : 0, y: activeTab === 'journal' ? 0 : 20 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
@@ -189,7 +189,7 @@ export const FeatureShowcase = () => {
                 src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E4%BA%A4%E6%98%93%E6%97%A5%E5%BF%97%E5%B1%95%E7%A4%BA%E5%9B%BE.png"
                 alt="交互式交易日志"
                 className="w-full h-auto rounded-[2rem]"
-                loading="eager"
+                loading="lazy" decoding="async"
               />
             </motion.div>
           </div>
@@ -198,7 +198,7 @@ export const FeatureShowcase = () => {
           <div className={activeTab === 'notebook' ? 'block' : 'hidden'}>
             <motion.div
               key="notebook-img"
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: activeTab === 'notebook' ? 1 : 0, y: activeTab === 'notebook' ? 0 : 20 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
@@ -206,7 +206,7 @@ export const FeatureShowcase = () => {
                 src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA%E6%88%AA%E5%9B%BE.png"
                 alt="智能交易笔记"
                 className="w-full h-auto rounded-[2rem]"
-                loading="eager"
+                loading="lazy" decoding="async"
               />
             </motion.div>
           </div>
@@ -215,7 +215,7 @@ export const FeatureShowcase = () => {
           <div className={activeTab === 'analytics' ? 'block' : 'hidden'}>
             <motion.div
               key="analytics-img"
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: activeTab === 'analytics' ? 1 : 0, y: activeTab === 'analytics' ? 0 : 20 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
@@ -223,7 +223,7 @@ export const FeatureShowcase = () => {
                 src="https://tradergrail-1421305391.cos.ap-guangzhou.myqcloud.com/%E5%88%86%E6%9E%90%E5%A4%8D%E7%9B%98%E9%A1%B5%E9%9D%A2%E6%88%AA%E5%9B%BE.png"
                 alt="精准交易分析"
                 className="w-full h-auto rounded-[2rem]"
-                loading="eager"
+                loading="lazy" decoding="async"
               />
             </motion.div>
           </div>
@@ -232,7 +232,7 @@ export const FeatureShowcase = () => {
             {activeTab !== 'journal' && activeTab !== 'notebook' && activeTab !== 'analytics' && (
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
@@ -247,7 +247,7 @@ export const FeatureShowcase = () => {
               <div className="relative p-8 lg:p-16 grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
                 <div className="lg:col-span-2 max-w-md">
                   <motion.div
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={false}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
                   >
