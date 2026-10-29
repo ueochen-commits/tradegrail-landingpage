@@ -143,7 +143,7 @@ export const Footer = () => {
             <ul className="space-y-4">
               {[
                 { key: 'footer.support.help', label: t('footer.support.help'), href: localized('/guides/first-trade') },
-                { key: 'footer.support.contact', label: 'ueochen@gmail.com', href: 'mailto:ueochen@gmail.com' }
+                { key: 'footer.support.contact', label: 'support@tradegrail.net', href: 'mailto:support@tradegrail.net' }
               ].map(link => (
                 <li key={link.key}><a href={link.href} className="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">{link.label}</a></li>
               ))}
